@@ -158,7 +158,7 @@ class _PersonalTabState extends State<PersonalTab> {
                   Get.offAll(LoginScreen());
                 },
                 title: Text(
-                  'Logout',
+                  'Keluar',
                   style: AppFont.semiBold
                       .copyWith(fontWeight: FontWeight.bold, fontSize: 17),
                 ),

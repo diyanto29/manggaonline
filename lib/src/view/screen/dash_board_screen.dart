@@ -49,25 +49,25 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               icon: bottomProvider.currentIndex != 0
                   ? SvgPicture.asset('assets/image/home_inactive.svg')
                   : SvgPicture.asset('assets/image/home_active.svg'),
-              label: 'Home',
+              label: 'Beranda',
             ),
             BottomNavigationBarItem(
               icon: bottomProvider.currentIndex != 1
                   ? SvgPicture.asset('assets/image/categories_inactive.svg')
                   : SvgPicture.asset('assets/image/categories_active.svg'),
-              label: 'Cart',
+              label: 'Kerajang',
             ),
             BottomNavigationBarItem(
               icon: bottomProvider.currentIndex != 2
                   ? SvgPicture.asset('assets/image/bag_inactive.svg')
                   : SvgPicture.asset('assets/image/bag_active.svg'),
-              label: 'History',
+              label: 'Riwayat',
             ),
             BottomNavigationBarItem(
                 icon: bottomProvider.currentIndex != 3
                     ? SvgPicture.asset('assets/image/profile_inactive.svg')
                     : SvgPicture.asset('assets/image/profile_active.svg'),
-                label: 'Personal'),
+                label: 'Saya'),
           ],
         ),
       ),
