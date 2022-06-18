@@ -43,8 +43,8 @@ class _BodyPageState extends State<BodyPage> {
                     shrinkWrap: true,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        childAspectRatio: 0.5,
-                        mainAxisSpacing: 10,
+                        childAspectRatio: 0.57,
+                        // mainAxisSpacing: 10,
                         crossAxisSpacing: 10),
                     itemBuilder: (_, index) {
                       return InkWell(
