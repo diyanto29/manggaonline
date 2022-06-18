@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AuthViewModel extends ChangeNotifier{
+class AuthViewModel extends ChangeNotifier {
   bool isLoggedIn = false;
   bool isLoading = false;
 
@@ -9,5 +9,4 @@ class AuthViewModel extends ChangeNotifier{
     isLoggedIn = true;
     notifyListeners();
   }
-
 }

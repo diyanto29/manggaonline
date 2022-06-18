@@ -5,7 +5,11 @@ class Address {
   String? addressTitle1;
   String? addressTitle2;
 
-  Address({this.id, this.userName, this.phone, this.addressTitle1,
+  Address(
+      {this.id,
+      this.userName,
+      this.phone,
+      this.addressTitle1,
       this.addressTitle2});
 
   Address.fromJson(Map<String, dynamic> json) {

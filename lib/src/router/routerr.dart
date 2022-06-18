@@ -20,12 +20,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
-class Routerr{
-  static RouteFactory onGenerateRouter = (RouteSettings settings){
-    switch(settings.name){
+class Routerr {
+  static RouteFactory onGenerateRouter = (RouteSettings settings) {
+    switch (settings.name) {
       case DetailProductScreens:
         final arg = settings.arguments! as Product;
-        return _generateMaterialRoute(DetailProductScreen(product: arg,));
+        return _generateMaterialRoute(DetailProductScreen(
+          product: arg,
+        ));
       case CheckoutScreens:
         return _generateMaterialRoute(CheckoutScreen());
       case ChoiceAddressScreens:
@@ -38,10 +40,14 @@ class Routerr{
         return _generateMaterialRoute(MyOrderScreen());
       case OrderDetailScreens:
         final arg = settings.arguments! as Order;
-        return _generateMaterialRoute(OrderDetailScreen(order: arg,));
+        return _generateMaterialRoute(OrderDetailScreen(
+          order: arg,
+        ));
       case RecentViewScreens:
         final arg = settings.arguments! as List<Product>;
-        return _generateMaterialRoute(RecentViewScreen(listRecentProduct: arg,));
+        return _generateMaterialRoute(RecentViewScreen(
+          listRecentProduct: arg,
+        ));
       case SplashScreens:
         return _generateMaterialRoute(SplashScreen());
       case LoginScreens:
@@ -55,14 +61,19 @@ class Routerr{
       case OtpScreens:
         return _generateMaterialRoute(OtpScreen());
       default:
-        return _generateMaterialRoute(Center(child: Text("On Unknown Router",style: TextStyle(
-          color: Colors.red,
-          fontSize: 25,
-        ),),));
+        return _generateMaterialRoute(Center(
+          child: Text(
+            "On Unknown Router",
+            style: TextStyle(
+              color: Colors.red,
+              fontSize: 25,
+            ),
+          ),
+        ));
     }
   };
 }
 
 PageTransition _generateMaterialRoute(Widget screen) {
-  return PageTransition(child: screen,type: PageTransitionType.fade);
+  return PageTransition(child: screen, type: PageTransitionType.fade);
 }

@@ -8,10 +8,10 @@ class ProductViewModel extends ChangeNotifier {
   List<Product>? listRecent = <Product>[];
   bool isLoading = false;
   int? isLikee = 0;
-  int selectIndex = 0 ;
+  int selectIndex = 0;
   Product? productt;
 
-  Future<List<Product>>? getListProduct()  {
+  Future<List<Product>>? getListProduct() {
     isLoading = true;
     notifyListeners();
     listProduct = productService?.listProduct;
@@ -19,13 +19,13 @@ class ProductViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-   Future likeProduct (Product product)  async {
+  Future likeProduct(Product product) async {
     print(product.title);
-     // productt?.isLike = product.isLike;
-     // if(productt?.isLike == 0){
-     //   productt?.isLike = 1;
-     //  notifyListeners();
-     // }
+    // productt?.isLike = product.isLike;
+    // if(productt?.isLike == 0){
+    //   productt?.isLike = 1;
+    //  notifyListeners();
+    // }
     // var a = listProduct?.indexWhere((element) => element.id == product.id);
     // if(a != -1){
     //   listProduct?[a].isLike = isLikee  = 1;
@@ -34,20 +34,19 @@ class ProductViewModel extends ChangeNotifier {
     // }
   }
 
-   addRecentView(Product product){
+  addRecentView(Product product) {
     if (listRecent!.isEmpty) {
       listRecent?.add(product);
-    }  else{
+    } else {
       if (listRecent!.contains(product)) {
-
-      } else{
+      } else {
         listRecent?.add(product);
       }
     }
   }
-  chooseOption(int index){
+
+  chooseOption(int index) {
     selectIndex = index;
     notifyListeners();
   }
-
 }

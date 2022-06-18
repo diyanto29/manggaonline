@@ -10,8 +10,12 @@ class Order {
   Address? address;
   String? orderNumber;
 
-
-  Order({this.id, this.createAt, this.total, this.listItemCart, this.address,
+  Order(
+      {this.id,
+      this.createAt,
+      this.total,
+      this.listItemCart,
+      this.address,
       this.orderNumber});
 
   Order.fromJson(Map<String, dynamic> json) {
@@ -22,5 +26,4 @@ class Order {
     address = json['address'];
     orderNumber = json['orderNumber'];
   }
-
 }

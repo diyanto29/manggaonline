@@ -62,7 +62,7 @@ class CheckoutScreen extends StatelessWidget {
                       ),
                       Spacer(),
                       InkWell(
-                        onTap: (){
+                        onTap: () {
                           Navigator.pushNamed(context, ChoiceAddressScreens);
                         },
                         child: Text(
@@ -203,15 +203,17 @@ class CheckoutScreen extends StatelessWidget {
               height: 49,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    primary: AppColors.primaryColorRed,
+                  primary: AppColors.primaryColorRed,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(40.0),
                   ),
-                    textStyle: AppFont.medium.copyWith(
-                      fontSize: 15,
-                      fontWeight: FontWeight.normal,
-                    ),),
-                onPressed: () => Navigator.pushNamed(context, OrderSuccessScreens),
+                  textStyle: AppFont.medium.copyWith(
+                    fontSize: 15,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+                onPressed: () =>
+                    Navigator.pushNamed(context, OrderSuccessScreens),
                 child: Text('Submit order'.toUpperCase()),
               ),
             ),

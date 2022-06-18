@@ -26,12 +26,10 @@ class _CartProductState extends State<CartProduct> {
     super.initState();
   }
 
-
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-
   }
 
   @override
@@ -46,7 +44,7 @@ class _CartProductState extends State<CartProduct> {
           Stack(
             children: [
               Padding(
-                padding: const EdgeInsets.only(bottom: 10,right: 2),
+                padding: const EdgeInsets.only(bottom: 5, right: 2),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: Image.network(
@@ -72,92 +70,100 @@ class _CartProductState extends State<CartProduct> {
               //     ),),
               //   )
               // ),
-             Consumer<ProductViewModel>(
-               builder: (BuildContext context,ProductViewModel  value, Widget? child) {
-                 return  Positioned(
-                   right: 0,
-                   bottom: 0,
-                   child: InkWell(
-                     onTap: (){
-                       // if (widget.product?.isLike == 0 ) {
-                       //   setState(() {
-                       //     widget.product?.isLike = 1;
-                       //   });
-                       // }
-                       // value.likeProduct(widget.product!);
-                       setState(() {
-                         widget.product!.isLike =! widget.product!.isLike!;
-                       });
-                     },
-                     child: Container(
-                         width: 40,
-                         height: 40,
-                         decoration: BoxDecoration(
-                           color: Colors.white,
-                           shape: BoxShape.circle,
-                           boxShadow: [
-                             BoxShadow(
-                               color: Colors.grey.withOpacity(.2),
-                               offset: Offset(1, 1),
-                               spreadRadius: 1,
-                             ),
-                           ],
-                         ),
-                         child: Icon(
-                           widget.product!.isLike! ?Icons.favorite  :  Icons.favorite_border,
-                           color:  widget.product!.isLike! ?  AppColors.primaryColorRed : AppColors.primaryColorGray,
-                           size: 19,
-                         )
-                     ),
-                   ),
-                 );
-               },
-             )
+              // Consumer<ProductViewModel>(
+              //   builder: (BuildContext context, ProductViewModel value,
+              //       Widget? child) {
+              //     return Positioned(
+              //       right: 0,
+              //       bottom: 0,
+              //       child: InkWell(
+              //         onTap: () {
+              //           // if (widget.product?.isLike == 0 ) {
+              //           //   setState(() {
+              //           //     widget.product?.isLike = 1;
+              //           //   });
+              //           // }
+              //           // value.likeProduct(widget.product!);
+              //           setState(() {
+              //             widget.product!.isLike = !widget.product!.isLike!;
+              //           });
+              //         },
+              //         child: Container(
+              //           width: 40,
+              //           height: 40,
+              //           decoration: BoxDecoration(
+              //             color: Colors.white,
+              //             shape: BoxShape.circle,
+              //             boxShadow: [
+              //               BoxShadow(
+              //                 color: Colors.grey.withOpacity(.2),
+              //                 offset: Offset(1, 1),
+              //                 spreadRadius: 1,
+              //               ),
+              //             ],
+              //           ),
+              //           //  child: Icon(
+              //           //    widget.product!.isLike! ?Icons.favorite  :  Icons.favorite_border,
+              //           //    color:  widget.product!.isLike! ?  AppColors.primaryColorRed : AppColors.primaryColorGray,
+              //           //    size: 19,
+              //           //  )
+              //         ),
+              //       ),
+              //     );
+              //   },
+              // )
             ],
           ),
-          Row(
-            children: [
-              RatingBar.builder(
-                initialRating: 5,
-                direction: Axis.horizontal,
-                itemSize: 15,
-                itemCount: 5,
-                ignoreGestures: true,
-                itemBuilder: (context, _) => Icon(
-                  Icons.star,
-                  color: Colors.amber,
-                ),
-                onRatingUpdate: (rating) {
-                  print(rating);
-                },
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Text('(10)')
-            ],
+          // Row(
+          //   children: [
+          //     RatingBar.builder(
+          //       initialRating: 5,
+          //       direction: Axis.horizontal,
+          //       itemSize: 15,
+          //       itemCount: 5,
+          //       ignoreGestures: true,
+          //       itemBuilder: (context, _) => Icon(
+          //         Icons.star,
+          //         color: Colors.amber,
+          //       ),
+          //       onRatingUpdate: (rating) {
+          //         print(rating);
+          //       },
+          //     ),
+          //     SizedBox(
+          //       width: 5,
+          //     ),
+          //     Text('(10)')
+          //   ],
+          // ),
+          // SizedBox(
+          //   height: 5,
+          // ),
+          // Text(
+          //   widget.product!.category!,
+          //   style: AppFont.regular.copyWith(
+          //     fontSize: 13,
+          //     color: Colors.grey,
+          //     fontWeight: FontWeight.normal,
+          //   ),
+          // ),
+          SizedBox(
+            height: 2,
+          ),
+          Text(
+            widget.product!.title!,
+            style: AppFont.bold.copyWith(
+              fontSize: 15,
+            ),
           ),
           SizedBox(
-            height: 5,
+            height: 2,
           ),
-          Text(widget.product!.category!,style: AppFont.regular.copyWith(
-            fontSize: 13,
-            color: Colors.grey,
-            fontWeight: FontWeight.normal,
-          ),),
-          SizedBox(
-            height: 8,
+          Text(
+            widget.product!.price.toString(),
+            style: AppFont.bold
+                .copyWith(fontSize: 14, color: AppColors.primaryColorRed),
           ),
-          Text(widget.product!.title!,style: AppFont.bold.copyWith(
-            fontSize: 17,
-          ),),
-          SizedBox(
-            height: 8,
-          ),
-          Text(widget.product!.price.toString(),style: AppFont.bold.copyWith(
-            fontSize: 14,
-            color: AppColors.primaryColorRed
-          ),),
         ],
       )),
     );

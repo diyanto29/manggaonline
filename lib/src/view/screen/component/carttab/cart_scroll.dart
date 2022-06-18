@@ -20,7 +20,7 @@ class CartScroll extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15,vertical: 20),
+        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,7 +58,7 @@ class CartScroll extends StatelessWidget {
                         ),
                         Spacer(),
                         InkWell(
-                          onTap: (){
+                          onTap: () {
                             Navigator.pushNamed(context, ChoiceAddressScreens);
                           },
                           child: Text(
@@ -182,7 +182,6 @@ class CartScroll extends StatelessWidget {
                     "$priceShip \$",
                     style: AppFont.semiBold.copyWith(
                       fontWeight: FontWeight.w600,
-
                       fontSize: 15,
                     ),
                   ),
@@ -205,7 +204,6 @@ class CartScroll extends StatelessWidget {
                     "${cartViewModel.total + priceShip} \$",
                     style: AppFont.semiBold.copyWith(
                       fontWeight: FontWeight.w600,
-
                       fontSize: 15,
                     ),
                   ),
@@ -252,7 +250,7 @@ class CartScroll extends StatelessWidget {
                       primary: AppColors.primaryColorRed,
                       textStyle: AppFont.medium.copyWith(
                           fontSize: 15, fontWeight: FontWeight.normal)),
-                  onPressed: (){
+                  onPressed: () {
                     cartViewModel.checkOutCart();
                     // Navigator.pushNamed(context, OrderSuccessScreens),
                   },
@@ -265,11 +263,12 @@ class CartScroll extends StatelessWidget {
       ),
     );
   }
+
   Widget buildTextHeader({required String title}) {
     return Text(
       title,
       style:
-      AppFont.semiBold.copyWith(fontWeight: FontWeight.w600, fontSize: 16),
+          AppFont.semiBold.copyWith(fontWeight: FontWeight.w600, fontSize: 16),
     );
   }
 }

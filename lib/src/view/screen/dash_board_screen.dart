@@ -21,7 +21,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     HomeTab(),
     CategoryTab(),
     CartTab(),
-    FavoriteTab(),
     PersonalTab(),
   ];
 
@@ -56,22 +55,16 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               icon: bottomProvider.currentIndex != 1
                   ? SvgPicture.asset('assets/image/categories_inactive.svg')
                   : SvgPicture.asset('assets/image/categories_active.svg'),
-              label: 'Category',
+              label: 'Cart',
             ),
             BottomNavigationBarItem(
               icon: bottomProvider.currentIndex != 2
                   ? SvgPicture.asset('assets/image/bag_inactive.svg')
                   : SvgPicture.asset('assets/image/bag_active.svg'),
-              label: 'Cart',
+              label: 'History',
             ),
             BottomNavigationBarItem(
-              icon: bottomProvider.currentIndex != 3
-                  ? SvgPicture.asset('assets/image/hear_inactive.svg')
-                  : SvgPicture.asset('assets/image/hear_active.svg'),
-              label: 'Favorite',
-            ),
-            BottomNavigationBarItem(
-                icon: bottomProvider.currentIndex != 4
+                icon: bottomProvider.currentIndex != 3
                     ? SvgPicture.asset('assets/image/profile_inactive.svg')
                     : SvgPicture.asset('assets/image/profile_active.svg'),
                 label: 'Personal'),

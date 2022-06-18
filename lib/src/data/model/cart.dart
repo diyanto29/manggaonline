@@ -7,11 +7,16 @@ class Cart {
   Address? address;
   Product? product;
   late int quantity;
-   String? createAt;
-   double? totalAmount;
+  String? createAt;
+  double? totalAmount;
 
-
-  Cart({this.product, this.quantity = 1,this.id,this.address,this.createAt,this.totalAmount});
+  Cart(
+      {this.product,
+      this.quantity = 1,
+      this.id,
+      this.address,
+      this.createAt,
+      this.totalAmount});
 
   Cart.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -20,7 +25,6 @@ class Cart {
     address = Address.fromJson(json['address']);
     createAt = json['create_at'];
     totalAmount = json['total_amount'];
-
   }
 
   void toggleDone() {

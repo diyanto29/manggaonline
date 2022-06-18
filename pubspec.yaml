@@ -35,6 +35,8 @@ dependencies:
   page_transition: ^2.0.2
   badges: ^2.0.1
   fluttertoast: ^8.0.7
+  dio: ^4.0.4
+  nb_utils: ^4.4.8
 
 dev_dependencies:
   flutter_test:

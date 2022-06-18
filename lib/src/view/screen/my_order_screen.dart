@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 class MyOrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final cartViewModel = Provider.of<CartViewModel>(context,listen: false);
+    final cartViewModel = Provider.of<CartViewModel>(context, listen: false);
 
     return Scaffold(
       body: SafeArea(
@@ -43,19 +43,19 @@ class MyOrderScreen extends StatelessWidget {
               Expanded(
                 child: ListView.builder(
                   itemCount: cartViewModel.listOrder.length,
-                  itemBuilder: (_,index){
+                  itemBuilder: (_, index) {
                     Order order = cartViewModel.listOrder[index];
                     return Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: InkWell(
-                        onTap: (){
-                          Navigator.pushNamed(context, OrderDetailScreens,arguments: order);
-                        },
-                        child: OrderProduct(
-                          order: order,
-                        ),
-                      )
-                    );
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(context, OrderDetailScreens,
+                                arguments: order);
+                          },
+                          child: OrderProduct(
+                            order: order,
+                          ),
+                        ));
                   },
                 ),
               )

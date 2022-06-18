@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-class AppFont{
+class AppFont {
   static final regular = TextStyle(
     fontFamily: 'Metro',
     fontWeight: FontWeight.w400,

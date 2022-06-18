@@ -11,10 +11,10 @@ class AddAddressScreen extends StatelessWidget {
   final phoneController = TextEditingController();
   final addressDetailController = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
-    final addressViewModel = Provider.of<AddressViewModel>(context,listen: false);
+    final addressViewModel =
+        Provider.of<AddressViewModel>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -35,23 +35,21 @@ class AddAddressScreen extends StatelessWidget {
         ),
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 13,vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
         child: Column(
           children: [
             SizedBox(
               height: 10,
             ),
             TextFieldAddress(
-
-                textEditingController: nameController,
-                lableText: "Full name",
-                ),
+              textEditingController: nameController,
+              lableText: "Full name",
+            ),
             SizedBox(
               height: 18,
             ),
             TextFieldAddress(
-                textEditingController: phoneController,
-                lableText: "Phone"),
+                textEditingController: phoneController, lableText: "Phone"),
             SizedBox(
               height: 18,
             ),
@@ -73,9 +71,15 @@ class AddAddressScreen extends StatelessWidget {
                   textStyle: AppFont.medium.copyWith(
                     fontSize: 15,
                     fontWeight: FontWeight.normal,
-                  ),),
+                  ),
+                ),
                 onPressed: () {
-                  addressViewModel.addAddress(Address(id: "",userName: nameController.text,phone: phoneController.text,addressTitle1: addressDetailController.text,addressTitle2: ""));
+                  addressViewModel.addAddress(Address(
+                      id: "",
+                      userName: nameController.text,
+                      phone: phoneController.text,
+                      addressTitle1: addressDetailController.text,
+                      addressTitle2: ""));
                 },
                 child: Text('save address'.toUpperCase()),
               ),
@@ -85,5 +89,4 @@ class AddAddressScreen extends StatelessWidget {
       ),
     );
   }
-
 }

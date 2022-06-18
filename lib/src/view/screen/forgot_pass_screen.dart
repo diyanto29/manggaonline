@@ -39,10 +39,13 @@ class ForgotPassScreen extends StatelessWidget {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * .1,
                 ),
-                Text('Please, enter your email address. You will receive a link to create a new password via email.',style: AppFont.medium.copyWith(
-                  fontSize: 14,
-                  fontWeight: FontWeight.normal,
-                ),),
+                Text(
+                  'Please, enter your email address. You will receive a link to create a new password via email.',
+                  style: AppFont.medium.copyWith(
+                    fontSize: 14,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
                 SizedBox(
                   height: 20,
                 ),

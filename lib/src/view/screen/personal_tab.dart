@@ -21,7 +21,7 @@ class _PersonalTabState extends State<PersonalTab> {
 
   @override
   Widget build(BuildContext context) {
-    var productVM = Provider.of<ProductViewModel>(context,listen: false);
+    var productVM = Provider.of<ProductViewModel>(context, listen: false);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: Column(
@@ -36,10 +36,10 @@ class _PersonalTabState extends State<PersonalTab> {
                 width: 70,
                 height: 70,
                 decoration: BoxDecoration(
-                 image: DecorationImage(
-                   image: NetworkImage('https://st3.depositphotos.com/1037987/15097/i/600/depositphotos_150975580-stock-photo-portrait-of-businesswoman-in-office.jpg'),
-                   fit: BoxFit.cover
-                 ),
+                  image: DecorationImage(
+                      image: NetworkImage(
+                          'https://st3.depositphotos.com/1037987/15097/i/600/depositphotos_150975580-stock-photo-portrait-of-businesswoman-in-office.jpg'),
+                      fit: BoxFit.cover),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -72,26 +72,26 @@ class _PersonalTabState extends State<PersonalTab> {
               )
             ],
           ),
-
           Expanded(
             child: ListView.separated(
               shrinkWrap: true,
               itemCount: listInfomation.length,
-              separatorBuilder: (BuildContext context, int index)  => Divider(),
+              separatorBuilder: (BuildContext context, int index) => Divider(),
               itemBuilder: (BuildContext context, int index) {
                 var title = listInfomation.keys.elementAt(index);
                 var subtitle = listInfomation.values.elementAt(index);
                 return InkWell(
                   onTap: () {
-                    switch(index){
+                    switch (index) {
                       case 0:
-                         Navigator.pushNamed(context, MyOrderScreens);
+                        Navigator.pushNamed(context, MyOrderScreens);
                         break;
                       case 1:
                         Navigator.pushNamed(context, ChoiceAddressScreens);
                         break;
                       case 4:
-                        Navigator.pushNamed(context, RecentViewScreens,arguments: productVM.listRecent);
+                        Navigator.pushNamed(context, RecentViewScreens,
+                            arguments: productVM.listRecent);
                         break;
                     }
                   },
@@ -99,8 +99,8 @@ class _PersonalTabState extends State<PersonalTab> {
                     contentPadding: EdgeInsets.all(0.0),
                     title: Text(
                       title,
-                      style: AppFont.semiBold.copyWith(
-                          fontWeight: FontWeight.bold, fontSize: 17),
+                      style: AppFont.semiBold
+                          .copyWith(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
                     subtitle: Text(
                       subtitle,
@@ -120,7 +120,6 @@ class _PersonalTabState extends State<PersonalTab> {
                   ),
                 );
               },
-
             ),
           )
         ],

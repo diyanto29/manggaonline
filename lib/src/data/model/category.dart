@@ -5,7 +5,7 @@ class Category {
   String? name;
   String? image;
 
-  Category({this.id,  @required this.name,  @required   this.image});
+  Category({this.id, @required this.name, @required this.image});
 
   Category.fromJson(Map<String, dynamic> json) {
     id = json['id'];

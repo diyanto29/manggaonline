@@ -8,8 +8,7 @@ class FavoriteScroll extends StatelessWidget {
     return Container(
       child: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 190/300),
+            crossAxisCount: 2, childAspectRatio: 190 / 300),
         itemCount: 10,
         itemBuilder: (_, index) {
           return FavoriteItem();

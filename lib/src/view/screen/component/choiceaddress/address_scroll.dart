@@ -28,7 +28,7 @@ class _AddressScrollState extends State<AddressScroll> {
 
   @override
   Widget build(BuildContext context) {
-    final cartViewModel = Provider.of<AddressViewModel>(context,listen: false);
+    final cartViewModel = Provider.of<AddressViewModel>(context, listen: false);
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),

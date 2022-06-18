@@ -51,8 +51,7 @@ class RegisterScreen extends StatelessWidget {
                   height: 10,
                 ),
                 TextFieldAddress(
-                    textEditingController: emailController,
-                    lableText: "Email"),
+                    textEditingController: emailController, lableText: "Email"),
                 SizedBox(
                   height: 25,
                 ),

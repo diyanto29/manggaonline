@@ -15,7 +15,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passController = TextEditingController();
-   bool isShowPass = false;
+  bool isShowPass = false;
 
   @override
   Widget build(BuildContext context) {
@@ -109,15 +109,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       border: InputBorder.none,
                       labelText: "Password",
                       suffixIcon: GestureDetector(
-                        onTap: (){
-                          setState(() {
-                            isShowPass =! isShowPass;
-                          });
-                        },
+                          onTap: () {
+                            setState(() {
+                              isShowPass = !isShowPass;
+                            });
+                          },
                           child: Icon(
-                        isShowPass ? Icons.visibility : Icons.visibility_off,
-                        size: 16,
-                      )),
+                            isShowPass
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            size: 16,
+                          )),
                       alignLabelWithHint: true,
                       // center labastyle
                       labelStyle: AppFont.regular.copyWith(
@@ -132,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 25,
                 ),
                 GestureDetector(
-                  onTap: ()=>Navigator.pushNamed(context, ForgotPassScreens),
+                  onTap: () => Navigator.pushNamed(context, ForgotPassScreens),
                   child: Align(
                     alignment: Alignment.topRight,
                     child: Text(
@@ -148,13 +150,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     Checkbox(
                       activeColor: AppColors.primaryColorRed,
                       value: true,
-                      onChanged: ( value) {
-
-                      },
+                      onChanged: (value) {},
                     ),
-                    Text("Remember me?",style: AppFont.medium.copyWith(
-                      fontSize: 14,
-                    ),),
+                    Text(
+                      "Remember me?",
+                      style: AppFont.medium.copyWith(
+                        fontSize: 14,
+                      ),
+                    ),
                   ],
                 ),
                 SizedBox(

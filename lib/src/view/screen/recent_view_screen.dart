@@ -34,8 +34,7 @@ class RecentViewScreen extends StatelessWidget {
         shrinkWrap: true,
         padding: EdgeInsets.all(0.0),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 80/140),
+            crossAxisCount: 2, childAspectRatio: 80 / 140),
         itemCount: listRecentProduct?.length,
         itemBuilder: (_, index) {
           Product? product = listRecentProduct![index];

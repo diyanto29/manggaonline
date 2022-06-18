@@ -34,8 +34,6 @@ class Inventory {
     int? stockQuantity,
   }) {
     return Inventory(
-      id: id ?? this.id,
-      stockQuantity: stockQuantity ?? this.stockQuantity
-    );
+        id: id ?? this.id, stockQuantity: stockQuantity ?? this.stockQuantity);
   }
 }
