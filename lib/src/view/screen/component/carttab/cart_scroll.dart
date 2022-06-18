@@ -1,6 +1,7 @@
 import 'package:fashion_app/src/const/app_colors.dart';
 import 'package:fashion_app/src/const/app_font.dart';
 import 'package:fashion_app/src/data/model/cart.dart';
+import 'package:fashion_app/src/data/model/cart_model/data_cart.dart';
 import 'package:fashion_app/src/router/router_path.dart';
 import 'package:fashion_app/src/viewmodel/cart_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -9,12 +10,13 @@ import 'package:provider/provider.dart';
 import 'cart_item.dart';
 
 class CartScroll extends StatelessWidget {
-  final List<Cart> listCart;
+  final List<DataCart> listCart;
+
   const CartScroll({Key? key, required this.listCart}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final cartViewModel = Provider.of<CartViewModel>(context, listen: true);
+    
     int priceShip = 15;
 
     return Scaffold(
@@ -104,11 +106,10 @@ class CartScroll extends StatelessWidget {
                 padding: EdgeInsets.all(0.0),
                 itemCount: listCart.length,
                 itemBuilder: (_, index) {
-                  Cart order = listCart[index];
                   return Dismissible(
                     key: UniqueKey(),
                     onDismissed: (value) {
-                      cartViewModel.removeCart(index);
+                      // cartViewModel.removeCart(index);
                     },
                     background: Container(
                       width: 50,
@@ -121,9 +122,7 @@ class CartScroll extends StatelessWidget {
                         size: 25,
                       ),
                     ),
-                    child: CartItem(
-                      order: order,
-                    ),
+                    child: CartItem(dataCart: listCart[index],),
                   );
                 },
               ),
@@ -157,7 +156,7 @@ class CartScroll extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    "${cartViewModel.total} \$",
+                    "100 \$",
                     style: AppFont.semiBold.copyWith(
                       fontWeight: FontWeight.w600,
                       fontSize: 15,
@@ -201,7 +200,7 @@ class CartScroll extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    "${cartViewModel.total + priceShip} \$",
+                    "${1000 + priceShip} \$",
                     style: AppFont.semiBold.copyWith(
                       fontWeight: FontWeight.w600,
                       fontSize: 15,
@@ -236,7 +235,7 @@ class CartScroll extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    "${cartViewModel.total + priceShip} VND",
+                    "${1000 + priceShip} VND",
                     style: AppFont.semiBold
                         .copyWith(fontSize: 17, fontWeight: FontWeight.w600),
                   ),
@@ -251,7 +250,7 @@ class CartScroll extends StatelessWidget {
                       textStyle: AppFont.medium.copyWith(
                           fontSize: 15, fontWeight: FontWeight.normal)),
                   onPressed: () {
-                    cartViewModel.checkOutCart();
+                    // cartViewModel.checkOutCart();
                     // Navigator.pushNamed(context, OrderSuccessScreens),
                   },
                   child: Text('Checkout'),

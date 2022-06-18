@@ -5,16 +5,40 @@ import 'package:provider/provider.dart';
 
 import 'component/carttab/cart_scroll.dart';
 
-class CartTab extends StatelessWidget {
+class CartTab extends StatefulWidget {
+  @override
+  State<CartTab> createState() => _CartTabState();
+}
+
+class _CartTabState extends State<CartTab> {
+  @override
+  void initState() {
+    Provider.of<CartViewModel>(context, listen: false).getCartProduk();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
         child: Consumer<CartViewModel>(
           builder: (BuildContext context, value, Widget? child) {
-            return value.listCart.isNotEmpty
-                ? CartScroll(listCart: value.listCart)
-                : CartEmptyScreen();
+            // return value.listCart.isNotEmpty
+            if (value.isLoadingCart) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else {
+              if (value.cartModel!.data!.isEmpty) {
+                return Center(
+                  child: Text("Keranjang Kosong"),
+                );
+              } else {
+                return CartScroll(listCart: value.cartModel!.data!);
+              }
+            }
+
+            // : CartEmptyScreen();
           },
         ),
       ),

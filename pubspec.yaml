@@ -37,6 +37,9 @@ dependencies:
   fluttertoast: ^8.0.7
   dio: ^4.0.4
   nb_utils: ^4.4.8
+  get: ^4.6.5
+  get_storage: ^2.0.3
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:

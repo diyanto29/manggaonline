@@ -1,8 +1,15 @@
+import 'package:fashion_app/network/dio_service.dart';
 import 'package:fashion_app/src/data/model/product.dart';
-import 'package:fashion_app/src/data/service/product_service.dart';
-import 'package:flutter/material.dart';
+import 'package:fashion_app/src/data/model/produk_model/produk_model.dart';
 
-class ProductViewModel extends ChangeNotifier {
+import 'package:fashion_app/src/data/service/product_service.dart';
+import 'package:fashion_app/src/view/screen/component/dialog_loading.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:nb_utils/nb_utils.dart';
+
+class ProductViewModel extends ChangeNotifier with DioService {
   ProductService? productService = ProductService();
   List<Product>? listProduct;
   List<Product>? listRecent = <Product>[];
@@ -10,6 +17,8 @@ class ProductViewModel extends ChangeNotifier {
   int? isLikee = 0;
   int selectIndex = 0;
   Product? productt;
+  ProdukModel? productModel;
+  GetStorage session = GetStorage();
 
   Future<List<Product>>? getListProduct() {
     isLoading = true;
@@ -48,5 +57,45 @@ class ProductViewModel extends ChangeNotifier {
   chooseOption(int index) {
     selectIndex = index;
     notifyListeners();
+  }
+
+  Future getProduct() async {
+    productModel = null;
+    final res = await dio.get('showproduct');
+    if (res.statusCode == 201) {
+      productModel = ProdukModel.fromJson(res.data);
+      notifyListeners();
+    }
+  }
+
+  ProdukModel? searchProduct;
+  bool isLoadingSearch = true;
+  Future getSearchProduct(String keyWord) async {
+    searchProduct = null;
+    isLoadingSearch = true;
+
+    final res = await dio.post('cariproduct', data: {"cari": keyWord});
+    isLoadingSearch = false;
+    notifyListeners();
+    if (res.statusCode == 201) {
+      searchProduct = ProdukModel.fromJson(res.data);
+      notifyListeners();
+    }
+  }
+
+  Future addKeranjang(String productId) async {
+    loadingBuilder();
+
+    final res = await dio.post('simpankranjang', data: {
+      "products_id": productId,
+      "user_id": session.read('userID'),
+      "qty": "1"
+    });
+    Get.back();
+    if (res.statusCode == 201) {
+      toast('Produk Berhasil Masuk Keranjang', gravity: ToastGravity.CENTER);
+    } else {
+      toast(res.data['message'], gravity: ToastGravity.CENTER);
+    }
   }
 }

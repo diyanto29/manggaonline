@@ -19,8 +19,8 @@ class DashBoardScreen extends StatefulWidget {
 class _DashBoardScreenState extends State<DashBoardScreen> {
   List<Widget> page = [
     HomeTab(),
-    CategoryTab(),
     CartTab(),
+    CategoryTab(),
     PersonalTab(),
   ];
 

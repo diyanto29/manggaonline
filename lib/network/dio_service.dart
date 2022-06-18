@@ -13,7 +13,7 @@ class DioService {
         connectTimeout: 60000,
         receiveTimeout: 60000,
         followRedirects: false,
-        baseUrl: 'https://api-dev.my-acq.com/api/v1',
+        baseUrl: 'http://192.168.42.33:8000/api/',
         validateStatus: (status) {
           return status! < 500;
         },

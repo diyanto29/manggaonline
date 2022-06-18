@@ -30,19 +30,19 @@ class RecentViewScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: GridView.builder(
-        shrinkWrap: true,
-        padding: EdgeInsets.all(0.0),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, childAspectRatio: 80 / 140),
-        itemCount: listRecentProduct?.length,
-        itemBuilder: (_, index) {
-          Product? product = listRecentProduct![index];
-          return CartProduct(
-            product: product,
-          );
-        },
-      ),
+      // body: GridView.builder(
+      //   shrinkWrap: true,
+      //   padding: EdgeInsets.all(0.0),
+      //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      //       crossAxisCount: 2, childAspectRatio: 80 / 140),
+      //   itemCount: listRecentProduct?.length,
+      //   itemBuilder: (_, index) {
+      //     Product? product = listRecentProduct![index];
+      //     return CartProduct(
+      //       product: product,
+      //     );
+      //   },
+      // ),
     );
   }
 }

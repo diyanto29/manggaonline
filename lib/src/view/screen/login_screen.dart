@@ -26,22 +26,22 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           body: Container(
-            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                IconButton(
-                    onPressed: () => Navigator.pop(context),
-                    alignment: Alignment.topLeft,
-                    padding: EdgeInsets.all(0.0),
-                    icon: Icon(
-                      Icons.arrow_back_ios_rounded,
-                      color: Colors.black,
-                      size: 20,
-                    )),
+                // IconButton(
+                //     onPressed: () => Navigator.pop(context),
+                //     alignment: Alignment.topLeft,
+                //     padding: EdgeInsets.all(0.0),
+                //     icon: Icon(
+                //       Icons.arrow_back_ios_rounded,
+                //       color: Colors.black,
+                //       size: 20,
+                //     )),
                 SizedBox(
-                  height: 15,
+                  height: 40,
                 ),
                 Text(
                   "Login",
@@ -131,38 +131,38 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 25,
+                  height: 50,
                 ),
-                GestureDetector(
-                  onTap: () => Navigator.pushNamed(context, ForgotPassScreens),
-                  child: Align(
-                    alignment: Alignment.topRight,
-                    child: Text(
-                      "Forgot yours password?",
-                      style: AppFont.medium.copyWith(
-                        fontSize: 13,
-                      ),
-                    ),
-                  ),
-                ),
-                Row(
-                  children: [
-                    Checkbox(
-                      activeColor: AppColors.primaryColorRed,
-                      value: true,
-                      onChanged: (value) {},
-                    ),
-                    Text(
-                      "Remember me?",
-                      style: AppFont.medium.copyWith(
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 25,
-                ),
+                // GestureDetector(
+                //   onTap: () => Navigator.pushNamed(context, ForgotPassScreens),
+                //   child: Align(
+                //     alignment: Alignment.topRight,
+                //     child: Text(
+                //       "Forgot yours password?",
+                //       style: AppFont.medium.copyWith(
+                //         fontSize: 13,
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                // Row(
+                //   children: [
+                //     Checkbox(
+                //       activeColor: AppColors.primaryColorRed,
+                //       value: true,
+                //       onChanged: (value) {},
+                //     ),
+                //     Text(
+                //       "Remember me?",
+                //       style: AppFont.medium.copyWith(
+                //         fontSize: 14,
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                // SizedBox(
+                //   height: 25,
+                // ),
                 SizedBox(
                   width: double.infinity,
                   height: 50,
@@ -174,9 +174,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     onPressed: () {
-                      authViewModel
-                          .login()
-                          .then((value) => Navigator.pop(context));
+                      authViewModel.loginAPi(emailController.text.trim(),
+                          passController.text.trim());
                     },
                     child: Text(
                       "Login".toUpperCase(),
@@ -208,67 +207,67 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 10,
                 ),
 
-                Center(
-                  child: Text(
-                    'Or',
-                    style: AppFont.medium.copyWith(
-                      fontSize: 13,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 80),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(
-                        width: 80,
-                        height: 65,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(.1),
-                                offset: Offset(1, 1),
-                                blurRadius: 1,
-                                spreadRadius: 2,
-                              )
-                            ]),
-                        child: SvgPicture.asset(
-                          'assets/image/ic_google.svg',
-                          width: 10,
-                          height: 10,
-                          fit: BoxFit.scaleDown,
-                        ),
-                      ),
-                      Container(
-                        width: 80,
-                        height: 65,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(.1),
-                                offset: Offset(1, 1),
-                                blurRadius: 1,
-                                spreadRadius: 2,
-                              )
-                            ]),
-                        child: SvgPicture.asset(
-                          'assets/image/ic_fb.svg',
-                          width: 10,
-                          height: 10,
-                          fit: BoxFit.scaleDown,
-                        ),
-                      ),
-                    ],
-                  ),
-                )
+                // Center(
+                //   child: Text(
+                //     'Or',
+                //     style: AppFont.medium.copyWith(
+                //       fontSize: 13,
+                //     ),
+                //   ),
+                // ),
+                // SizedBox(
+                //   height: 10,
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 80),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //     children: [
+                //       Container(
+                //         width: 80,
+                //         height: 65,
+                //         decoration: BoxDecoration(
+                //             color: Colors.white,
+                //             borderRadius: BorderRadius.circular(20),
+                //             boxShadow: [
+                //               BoxShadow(
+                //                 color: Colors.grey.withOpacity(.1),
+                //                 offset: Offset(1, 1),
+                //                 blurRadius: 1,
+                //                 spreadRadius: 2,
+                //               )
+                //             ]),
+                //         child: SvgPicture.asset(
+                //           'assets/image/ic_google.svg',
+                //           width: 10,
+                //           height: 10,
+                //           fit: BoxFit.scaleDown,
+                //         ),
+                //       ),
+                //       Container(
+                //         width: 80,
+                //         height: 65,
+                //         decoration: BoxDecoration(
+                //             color: Colors.white,
+                //             borderRadius: BorderRadius.circular(20),
+                //             boxShadow: [
+                //               BoxShadow(
+                //                 color: Colors.grey.withOpacity(.1),
+                //                 offset: Offset(1, 1),
+                //                 blurRadius: 1,
+                //                 spreadRadius: 2,
+                //               )
+                //             ]),
+                //         child: SvgPicture.asset(
+                //           'assets/image/ic_fb.svg',
+                //           width: 10,
+                //           height: 10,
+                //           fit: BoxFit.scaleDown,
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // )
               ],
             ),
           ),

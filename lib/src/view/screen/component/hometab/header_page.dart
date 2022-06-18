@@ -9,20 +9,24 @@ class HeaderPage extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    return CarouselSlider(
-      options: CarouselOptions(
-        height: 200,
-        viewportFraction: 1.0,
-        autoPlay: true,
-        enlargeCenterPage: false,
-        // autoPlay: false,
+    return Container(
+      height: 180,
+      width: double.infinity,
+      child: CarouselSlider(
+        options: CarouselOptions(
+          height: 200,
+          viewportFraction: 1.0,
+          autoPlay: true,
+          enlargeCenterPage: false,
+          // autoPlay: false,
+        ),
+        items: listImage
+            .map((e) => Image.network(
+                  e,
+                  fit: BoxFit.cover,
+                ))
+            .toList(),
       ),
-      items: listImage
-          .map((e) => Image.network(
-                e,
-                fit: BoxFit.cover,
-              ))
-          .toList(),
     );
   }
 }

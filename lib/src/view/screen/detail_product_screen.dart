@@ -3,10 +3,13 @@ import 'dart:ui';
 
 import 'package:badges/badges.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:fashion_app/main.dart';
 import 'package:fashion_app/src/const/app_colors.dart';
 import 'package:fashion_app/src/const/app_font.dart';
+import 'package:fashion_app/src/const/endpoint.dart';
 import 'package:fashion_app/src/data/model/inventory.dart';
 import 'package:fashion_app/src/data/model/product.dart';
+import 'package:fashion_app/src/data/model/produk_model/datum.dart';
 import 'package:fashion_app/src/router/router_path.dart';
 import 'package:fashion_app/src/viewmodel/auth_viemodel.dart';
 import 'package:fashion_app/src/viewmodel/cart_viewmodel.dart';
@@ -18,7 +21,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class DetailProductScreen extends StatefulWidget {
-  final Product? product;
+  final DataProduk? product;
 
   const DetailProductScreen({Key? key, this.product}) : super(key: key);
 
@@ -53,57 +56,46 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
         ),
         backgroundColor: Colors.white,
         title: Text(
-          widget.product!.title!,
+          widget.product!.name!,
           style: AppFont.semiBold,
         ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.favorite_border,
-              color: Colors.black,
-              size: 22,
-            ),
-          ),
-          IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Badge(
-                badgeColor: AppColors.primaryColorRed,
-                badgeContent: Text(
-                  cartViewModel.productCount.toString(),
-                  style: AppFont.regular
-                      .copyWith(fontSize: 12, color: Colors.white),
-                ),
-                position: BadgePosition.topEnd(top: -8, end: -5),
-                child: Icon(
-                  Icons.shopping_cart_outlined,
-                  color: Colors.black,
-                ),
-              )),
-        ],
+        // actions: [
+        //   IconButton(
+        //     onPressed: () {
+        //       Navigator.pop(context);
+        //     },
+        //     icon: Icon(
+        //       Icons.favorite_border,
+        //       color: Colors.black,
+        //       size: 22,
+        //     ),
+        //   ),
+        //   IconButton(
+        //       onPressed: () {
+        //         Navigator.pop(context);
+        //       },
+        //       icon: Badge(
+        //         badgeColor: AppColors.primaryColorRed,
+        //         badgeContent: Text(
+        //           cartViewModel.productCount.toString(),
+        //           style: AppFont.regular
+        //               .copyWith(fontSize: 12, color: Colors.white),
+        //         ),
+        //         position: BadgePosition.topEnd(top: -8, end: -5),
+        //         child: Icon(
+        //           Icons.shopping_cart_outlined,
+        //           color: Colors.black,
+        //         ),
+        //       )),
+        // ],
       ),
       body: Container(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              CarouselSlider(
-                options: CarouselOptions(
-                  height: 330,
-                  viewportFraction: 1.0,
-                  autoPlay: true,
-                  enlargeCenterPage: false,
-                  // autoPlay: false,
-                ),
-                items: listImage
-                    .map((e) => Image.network(
-                          e,
-                          fit: BoxFit.cover,
-                        ))
-                    .toList(),
+              Image.network(
+                EndPoint.photoUrl + widget.product!.image!,
+                fit: BoxFit.cover,
               ),
               SizedBox(height: 20),
               Padding(
@@ -116,13 +108,13 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                       children: [
                         Expanded(
                           child: Text(
-                            widget.product!.title!,
-                            style: AppFont.bold.copyWith(fontSize: 23),
+                            widget.product!.name!,
+                            style: AppFont.bold.copyWith(fontSize: 18),
                           ),
                         ),
                         Text(
-                          widget.product!.price.toString(),
-                          style: AppFont.bold.copyWith(fontSize: 23),
+                          "Rp ${formatCurrency.format(widget.product!.price)}",
+                          style: AppFont.bold.copyWith(fontSize: 18),
                         ),
                       ],
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -131,7 +123,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                       height: 5,
                     ),
                     Text(
-                      widget.product!.category!,
+                      "Stok : " + widget.product!.stok.toString(),
                       style: AppFont.regular.copyWith(
                           fontWeight: FontWeight.normal,
                           fontSize: 13,
@@ -140,33 +132,43 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                     SizedBox(
                       height: 8,
                     ),
-                    Row(
-                      children: [
-                        RatingBar.builder(
-                          initialRating: 5,
-                          direction: Axis.horizontal,
-                          itemSize: 15,
-                          itemCount: 5,
-                          ignoreGestures: true,
-                          itemBuilder: (context, _) => Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
-                          onRatingUpdate: (rating) {
-                            print(rating);
-                          },
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text('(10)')
-                      ],
+                    Text(
+                      "Berat : " + widget.product!.weigth.toString() + " gram",
+                      style: AppFont.regular.copyWith(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 13,
+                          color: Colors.grey),
                     ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    // Row(
+                    //   children: [
+                    //     RatingBar.builder(
+                    //       initialRating: 5,
+                    //       direction: Axis.horizontal,
+                    //       itemSize: 15,
+                    //       itemCount: 5,
+                    //       ignoreGestures: true,
+                    //       itemBuilder: (context, _) => Icon(
+                    //         Icons.star,
+                    //         color: Colors.amber,
+                    //       ),
+                    //       onRatingUpdate: (rating) {
+                    //         print(rating);
+                    //       },
+                    //     ),
+                    //     SizedBox(
+                    //       width: 5,
+                    //     ),
+                    //     Text('(10)')
+                    //   ],
+                    // ),
                     SizedBox(
                       height: 15,
                     ),
                     Text(
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget massa ac tellus mattis aliquet ac eu ex. Sed in ex iaculis, mattis ex a, dapibus lectus. Suspendisse aliquam ipsum sit amet nibh lacinia, vel laoreet velit facilisis. Ut lobortis erat velit, vel pulvinar nisi rutrum vitae. Sed fringilla condimentum erat eu sagittis. Maecenas eget lectus accumsan, imperdiet augue ac, commodo tortor. Nulla commodo tempor nisl, a elementum magna vulputate ut. Maecenas augue quam, pulvinar non fermentum non, dignissim quis augue. Sed pretium scelerisque eros, nec blandit diam tempus eu. In hac habitasse platea dictumst. Integer arcu lectus, blandit ut imperdiet pellentesque, laoreet id dolor. Praesent vel nisi vel nisi imperdiet facilisis. Sed metus augue, semper sit amet turpis ac, interdum vestibulum turpis. Nullam vestibulum justo laoreet accumsan efficitur.Cras ac elit a urna tristique suscipit ac a magna. Duis auctor in est sed egestas. Nullam in fringilla tortor, in laoreet tortor. Aliquam ex orci, pellentesque nec sapien ac, ornare mattis erat. Sed a metus metus. Donec urna lacus, iaculis commodo dictum id, fermentum maximus sapien. Phasellus quis ipsum magna. Sed in convallis nibh, ut vehicula augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi placerat facilisis metus. Morbi lacinia in enim quis dignissim. Aenean enim justo, tristique at fringilla sed, consequat dapibus orci. Aenean elit urna, porta id ultrices tempus, mollis sed velit.",
+                      widget.product?.description ?? '',
                       style: AppFont.regular.copyWith(
                           fontWeight: FontWeight.w400,
                           fontSize: 15,
@@ -181,13 +183,13 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                     SizedBox(
                       height: 5,
                     ),
-                    Text(
-                      "Rating & Review",
-                      style: AppFont.bold.copyWith(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 23,
-                          color: Colors.black),
-                    ),
+                    // Text(
+                    //   "Rating & Review",
+                    //   style: AppFont.bold.copyWith(
+                    //       fontWeight: FontWeight.bold,
+                    //       fontSize: 23,
+                    //       color: Colors.black),
+                    // ),
                   ],
                 ),
               ),
@@ -218,11 +220,8 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                   ),
                 ),
                 onPressed: () {
-                  if (authViewModel.isLoggedIn == false) {
-                    Navigator.pushNamed(context, LoginScreens);
-                  } else {
-                    showChooseSize(ctx, widget.product);
-                  }
+                  Provider.of<ProductViewModel>(ctx, listen: false)
+                      .addKeranjang(widget.product!.id.toString());
                 },
                 child: Text(
                   "Add to cart".toUpperCase(),
@@ -398,16 +397,8 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                         onPressed: () {
                           // String? size = product.inventory![productViewModel.selectIndex].size;
                           // String? color = product.inventory![productViewModel.selectIndex].color;
-                          Provider.of<CartViewModel>(ctx, listen: false)
-                              .addToCart(product!, a!);
-                          if (Provider.of<CartViewModel>(ctx, listen: false)
-                                  .message !=
-                              null) {
-                            Fluttertoast.showToast(
-                                msg: Provider.of<CartViewModel>(ctx,
-                                        listen: false)
-                                    .message);
-                          }
+                          Provider.of<ProductViewModel>(ctx, listen: false)
+                              .addKeranjang(product!.id!);
                         },
                         child: Text(
                           "Add to cart".toUpperCase(),

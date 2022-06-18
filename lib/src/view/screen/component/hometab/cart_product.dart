@@ -1,6 +1,9 @@
+import 'package:fashion_app/main.dart';
 import 'package:fashion_app/src/const/app_colors.dart';
 import 'package:fashion_app/src/const/app_font.dart';
+import 'package:fashion_app/src/const/endpoint.dart';
 import 'package:fashion_app/src/data/model/product.dart';
+import 'package:fashion_app/src/data/model/produk_model/datum.dart';
 import 'package:fashion_app/src/viewmodel/product_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -8,7 +11,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class CartProduct extends StatefulWidget {
-  final Product? product;
+  final DataProduk? product;
   final int? index;
   // final VoidCallback onFavoritePressed;
 
@@ -48,7 +51,7 @@ class _CartProductState extends State<CartProduct> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: Image.network(
-                    widget.product!.urlImage![0],
+                    EndPoint.photoUrl + widget.product!.image!,
                     fit: BoxFit.cover,
                     width: 160,
                     height: 220,
@@ -139,19 +142,9 @@ class _CartProductState extends State<CartProduct> {
           // SizedBox(
           //   height: 5,
           // ),
-          // Text(
-          //   widget.product!.category!,
-          //   style: AppFont.regular.copyWith(
-          //     fontSize: 13,
-          //     color: Colors.grey,
-          //     fontWeight: FontWeight.normal,
-          //   ),
-          // ),
-          SizedBox(
-            height: 2,
-          ),
+
           Text(
-            widget.product!.title!,
+            widget.product!.name!,
             style: AppFont.bold.copyWith(
               fontSize: 15,
             ),
@@ -160,7 +153,18 @@ class _CartProductState extends State<CartProduct> {
             height: 2,
           ),
           Text(
-            widget.product!.price.toString(),
+            "Stok ${widget.product!.stok.toString()}",
+            style: AppFont.regular.copyWith(
+              fontSize: 13,
+              color: Colors.grey,
+              fontWeight: FontWeight.normal,
+            ),
+          ),
+          SizedBox(
+            height: 2,
+          ),
+          Text(
+            "Rp ${formatCurrency.format(widget.product!.price)}",
             style: AppFont.bold
                 .copyWith(fontSize: 14, color: AppColors.primaryColorRed),
           ),

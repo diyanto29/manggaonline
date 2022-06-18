@@ -9,14 +9,22 @@ import 'package:fashion_app/src/viewmodel/bottom_navigate_provider.dart';
 import 'package:fashion_app/src/viewmodel/cart_viewmodel.dart';
 import 'package:fashion_app/src/viewmodel/product_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+final formatCurrency =
+    NumberFormat.currency(locale: "id_ID", symbol: "", decimalDigits: 0);
+void main() async {
+  await GetStorage.init();
+  initializeDateFormatting('id');
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  GetStorage session = GetStorage();
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -28,13 +36,13 @@ class MyApp extends StatelessWidget {
             create: (_) => ProductViewModel()..getListProduct()),
         ChangeNotifierProvider(create: (_) => AuthViewModel())
       ],
-      child: MaterialApp(
+      child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
         onGenerateRoute: Routerr.onGenerateRouter,
-        home: DashBoardScreen(),
+        home: session.hasData('userID') ? DashBoardScreen() : LoginScreen(),
       ),
     );
   }

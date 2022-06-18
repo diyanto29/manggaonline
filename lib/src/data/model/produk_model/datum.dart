@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
 
-class Produk {
+class DataProduk {
   int? id;
   String? name;
   String? description;
@@ -13,7 +13,7 @@ class Produk {
   int? stok;
   String? unit;
 
-  Produk({
+  DataProduk({
     this.id,
     this.name,
     this.description,
@@ -29,10 +29,10 @@ class Produk {
 
   @override
   String toString() {
-    return 'Produk(id: $id, name: $name, description: $description, image: $image, price: $price, weigth: $weigth, categoriesId: $categoriesId, createdAt: $createdAt, updatedAt: $updatedAt, stok: $stok, unit: $unit)';
+    return 'DataProduk(id: $id, name: $name, description: $description, image: $image, price: $price, weigth: $weigth, categoriesId: $categoriesId, createdAt: $createdAt, updatedAt: $updatedAt, stok: $stok, unit: $unit)';
   }
 
-  factory Produk.fromJson(Map<String, dynamic> json) => Produk(
+  factory DataProduk.fromJson(Map<String, dynamic> json) => DataProduk(
         id: json['id'] as int?,
         name: json['name'] as String?,
         description: json['description'] as String?,
@@ -67,7 +67,7 @@ class Produk {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! Produk) return false;
+    if (other is! DataProduk) return false;
     final mapEquals = const DeepCollectionEquality().equals;
     return mapEquals(other.toJson(), toJson());
   }

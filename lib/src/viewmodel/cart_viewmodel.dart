@@ -1,11 +1,14 @@
+import 'package:fashion_app/network/dio_service.dart';
 import 'package:fashion_app/src/data/model/address.dart';
+import 'package:fashion_app/src/data/model/cart_model/cart_model.dart';
 import 'package:fashion_app/src/data/model/inventory.dart';
 import 'package:fashion_app/src/data/model/cart.dart';
 import 'package:fashion_app/src/data/model/order.dart';
 import 'package:fashion_app/src/data/model/product.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:get_storage/get_storage.dart';
 
-class CartViewModel extends ChangeNotifier {
+class CartViewModel extends ChangeNotifier with DioService {
   List<Cart> listCart = [];
   int curr = 1;
   bool isFound = true;
@@ -13,6 +16,10 @@ class CartViewModel extends ChangeNotifier {
   double total = 0;
   int productCount = 0;
   List<Order> listOrder = [];
+
+  CartModel? cartModel;
+  bool isLoadingCart = true;
+  GetStorage session = GetStorage();
 
   addToCart(Product product, Inventory inventoryy) {
     productCount = 0;
@@ -103,5 +110,19 @@ class CartViewModel extends ChangeNotifier {
             addressTitle2: "9384932",
             phone: "97334324"),
         orderNumber: "098765456789"));
+  }
+
+  Future getCartProduk() async {
+    cartModel = null;
+    isLoadingCart = true;
+
+    final res = await dio
+        .post('showkranjang', data: {"user_id": session.read('userID')});
+    isLoadingCart = false;
+    notifyListeners();
+    if (res.statusCode == 201) {
+      cartModel = CartModel.fromJson(res.data);
+      notifyListeners();
+    }
   }
 }

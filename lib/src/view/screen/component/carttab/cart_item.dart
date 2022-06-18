@@ -1,13 +1,19 @@
+import 'package:fashion_app/main.dart';
 import 'package:fashion_app/src/const/app_font.dart';
 import 'package:fashion_app/src/data/model/cart.dart';
+import 'package:fashion_app/src/data/model/cart_model/data_cart.dart';
 import 'package:fashion_app/src/viewmodel/cart_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CartItem extends StatelessWidget {
-  final Cart order;
+import '../../../../const/endpoint.dart';
 
-  const CartItem({Key? key, required this.order}) : super(key: key);
+class CartItem extends StatelessWidget {
+  final DataCart dataCart;
+  const CartItem({
+    Key? key,
+    required this.dataCart,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +28,9 @@ class CartItem extends StatelessWidget {
             height: 120,
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: NetworkImage(order.product!.urlImage![0]),
+                  image: NetworkImage(
+                    EndPoint.photoUrl + dataCart.image!,
+                  ),
                   fit: BoxFit.cover),
               borderRadius: BorderRadius.circular(5),
             ),
@@ -37,7 +45,7 @@ class CartItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    order.product!.title!,
+                    dataCart.name ?? '',
                     overflow: TextOverflow.ellipsis,
                     style: AppFont.semiBold.copyWith(
                         color: Colors.black,
@@ -47,51 +55,51 @@ class CartItem extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  Row(
-                    children: [
-                      RichText(
-                        text: TextSpan(children: [
-                          TextSpan(
-                              text: "Color: ",
-                              style: AppFont.regular.copyWith(
-                                  color: Colors.grey,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14),
-                              children: [
-                                TextSpan(
-                                  text: order.product!.inventory![0].color,
-                                  style: AppFont.regular.copyWith(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 14),
-                                )
-                              ]),
-                        ]),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      RichText(
-                        text: TextSpan(children: [
-                          TextSpan(
-                              text: "Size: ",
-                              style: AppFont.regular.copyWith(
-                                  color: Colors.grey,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14),
-                              children: [
-                                TextSpan(
-                                  text: order.product!.inventory![0].size,
-                                  style: AppFont.regular.copyWith(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 14),
-                                )
-                              ]),
-                        ]),
-                      )
-                    ],
-                  ),
+                  // Row(
+                  //   children: [
+                  //     RichText(
+                  //       text: TextSpan(children: [
+                  //         TextSpan(
+                  //             text: "Color: ",
+                  //             style: AppFont.regular.copyWith(
+                  //                 color: Colors.grey,
+                  //                 fontWeight: FontWeight.w400,
+                  //                 fontSize: 14),
+                  //             children: [
+                  //               TextSpan(
+                  //                 text: order.product!.inventory![0].color,
+                  //                 style: AppFont.regular.copyWith(
+                  //                     color: Colors.black,
+                  //                     fontWeight: FontWeight.w400,
+                  //                     fontSize: 14),
+                  //               )
+                  //             ]),
+                  //       ]),
+                  //     ),
+                  //     SizedBox(
+                  //       width: 5,
+                  //     ),
+                  //     RichText(
+                  //       text: TextSpan(children: [
+                  //         TextSpan(
+                  //             text: "Size: ",
+                  //             style: AppFont.regular.copyWith(
+                  //                 color: Colors.grey,
+                  //                 fontWeight: FontWeight.w400,
+                  //                 fontSize: 14),
+                  //             children: [
+                  //               TextSpan(
+                  //                 text: 'aa',
+                  //                 style: AppFont.regular.copyWith(
+                  //                     color: Colors.black,
+                  //                     fontWeight: FontWeight.w400,
+                  //                     fontSize: 14),
+                  //               )
+                  //             ]),
+                  //       ]),
+                  //     )
+                  //   ],
+                  // ),
                   SizedBox(
                     height: 20,
                   ),
@@ -110,8 +118,8 @@ class CartItem extends StatelessWidget {
                             Flexible(
                               child: InkWell(
                                 onTap: () {
-                                  cartViewModel.increQuantity(
-                                      order, order.product!.inventory![0]);
+                                  // cartViewModel.increQuantity(
+                                  //     order, order.product!.inventory![0]);
                                 },
                                 child: Icon(
                                   Icons.add,
@@ -125,7 +133,7 @@ class CartItem extends StatelessWidget {
                             ),
                             Flexible(
                               flex: 1,
-                              child: Text(order.quantity.toString()),
+                              child: Text(dataCart.qty.toString()),
                             ),
                             SizedBox(
                               width: 15,
@@ -133,7 +141,7 @@ class CartItem extends StatelessWidget {
                             Flexible(
                               child: InkWell(
                                 onTap: () {
-                                  cartViewModel.deceQuanity(order);
+                                  // cartViewModel.deceQuanity(order);
                                 },
                                 child: Icon(
                                   Icons.remove,
@@ -146,7 +154,7 @@ class CartItem extends StatelessWidget {
                         ),
                       ),
                       Spacer(),
-                      Text("${order.product!.price!} \$")
+                      Text("${formatCurrency.format(dataCart.price)}")
                     ],
                   ),
                 ],

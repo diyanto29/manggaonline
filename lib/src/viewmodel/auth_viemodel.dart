@@ -1,12 +1,77 @@
+import 'package:fashion_app/network/dio_service.dart';
+import 'package:fashion_app/src/view/screen/component/dialog_loading.dart';
+import 'package:fashion_app/src/view/screen/dash_board_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
-class AuthViewModel extends ChangeNotifier {
+class AuthViewModel extends ChangeNotifier with DioService {
   bool isLoggedIn = false;
   bool isLoading = false;
+  GetStorage session = GetStorage();
 
   Future login() async {
     isLoggedIn = true;
     notifyListeners();
+  }
+
+  Future loginAPi(String email, String password) async {
+    if (email.isEmpty || password.isEmpty) {
+      toast('Email atau password tidak boleh kosong',
+          gravity: ToastGravity.TOP);
+      return;
+    }
+    loadingBuilder();
+    final res = await dio.post('login', data: {
+      "email": email,
+      "password": password,
+    });
+    Get.back();
+    if (res.statusCode == 201) {
+      if (res.data['status']) {
+        var data = res.data['data']['detail_user'];
+        session.write('userID', data['id']);
+        session.write('username', data['name']);
+        session.write('email', data['email']);
+        session.write('role', data['role']);
+        Get.offAll(DashBoardScreen());
+      } else {
+        toast('Email atau password Salah', gravity: ToastGravity.TOP);
+      }
+    } else {
+      toast('Email atau password Salah', gravity: ToastGravity.TOP);
+    }
+  }
+
+  Future register(String name, String email, String password) async {
+    if (name.isEmpty || email.isEmpty || password.isEmpty) {
+      toast('Form tidak boleh kosong', gravity: ToastGravity.TOP);
+      return;
+    }
+    loadingBuilder();
+    final res = await dio.post('register', data: {
+      "email": email,
+      "password": password,
+      "name": name,
+      "role": 'customer'
+    });
+    Get.back();
+    if (res.statusCode == 201) {
+      if (res.data['status']) {
+        var data = res.data['data'];
+        session.write('userID', data['id']);
+        session.write('username', data['name']);
+        session.write('email', data['email']);
+        session.write('role', data['role']);
+        Get.offAll(DashBoardScreen());
+        toast('Register Berhasil', gravity: ToastGravity.TOP);
+      } else {
+        toast('Register Gagal', gravity: ToastGravity.TOP);
+      }
+    } else {
+      toast('Register Gagal', gravity: ToastGravity.TOP);
+    }
   }
 }

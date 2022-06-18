@@ -1,5 +1,6 @@
 import 'package:fashion_app/src/const/app_font.dart';
 import 'package:fashion_app/src/data/model/product.dart';
+import 'package:fashion_app/src/data/model/produk_model/datum.dart';
 import 'package:fashion_app/src/router/router_path.dart';
 import 'package:fashion_app/src/viewmodel/product_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -18,90 +19,54 @@ class _BodyPageState extends State<BodyPage> {
     ProductViewModel prductVM = Provider.of(context, listen: false);
     double cardWidth = ((MediaQuery.of(context).size.width - 40) / 2);
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          buildHeaderBody(title: "Produk Baru", description: "Produk Baru"),
-
-          SizedBox(
-            height: 10,
-          ),
-          SizedBox(
-              height: cardWidth / 0.59,
-              child: ListView.builder(
-                itemCount: prductVM.listProduct?.length,
-                padding: EdgeInsets.all(0.0),
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (_, index) {
-                  Product? product = prductVM.listProduct![index];
-                  return InkWell(
-                    onTap: () {
-                      prductVM.addRecentView(product);
-                      Navigator.pushNamed(context, DetailProductScreens,
-                          arguments: product);
+    return Consumer<ProductViewModel>(builder: (context, data, _) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 10,
+            ),
+            buildHeaderBody(
+                title: 'Produk kami', description: 'Produk Pilihan Anda'),
+            SizedBox(
+              height: 10,
+            ),
+            data.productModel == null
+                ? Center(
+                    child: CircularProgressIndicator.adaptive(),
+                  )
+                : GridView.builder(
+                    physics: ClampingScrollPhysics(),
+                    shrinkWrap: true,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 0.6,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10),
+                    itemBuilder: (_, index) {
+                      return InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, DetailProductScreens,
+                              arguments: data.productModel?.data![index]);
+                        },
+                        child: CartProduct(
+                          index: index,
+                          product: data.productModel?.data![index],
+                        ),
+                      );
                     },
-                    child: CartProduct(
-                      index: index,
-                      product: product,
-                    ),
-                  );
-                },
-              )),
-          SizedBox(
-            height: 10,
-          ),
-          buildHeaderBody(title: "Semua Produk", description: "Semua Produk"),
-
-          SizedBox(
-            height: 10,
-          ),
-          SizedBox(
-              height: cardWidth / 0.59,
-              child: ListView.builder(
-                itemCount: prductVM.listProduct?.length,
-                padding: EdgeInsets.all(0.0),
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (_, index) {
-                  Product? product = prductVM.listProduct![index];
-                  return InkWell(
-                    onTap: () {
-                      prductVM.addRecentView(product);
-                      Navigator.pushNamed(context, DetailProductScreens,
-                          arguments: product);
-                    },
-                    child: CartProduct(
-                      index: index,
-                      product: product,
-                    ),
-                  );
-                },
-              )),
-          // SizedBox(
-          //   height: 40,
-          // ),
-          // buildHeaderBody(title: "New", description: "You’ve never seen it before!"),
-          //
-          // SizedBox(
-          //   height: 20,
-          // ),
-          //
-          // SizedBox(
-          //     height: cardWidth / 0.59,
-          //     child: ListView.builder(
-          //       itemCount: 10,
-          //       padding: EdgeInsets.all(0.0),
-          //       scrollDirection: Axis.horizontal,
-          //       itemBuilder: (_,index){
-          //         return CartProduct();
-          //       },
-          //     )
-          // ),
-        ],
-      ),
-    );
+                    itemCount: data.productModel?.data?.length,
+                  ),
+            SizedBox(
+              height: 10,
+            ),
+          ],
+        ),
+      );
+    });
   }
 
   Widget buildHeaderBody({required String title, required String description}) {
@@ -131,14 +96,14 @@ class _BodyPageState extends State<BodyPage> {
           ],
         ),
         Spacer(),
-        Text(
-          'View all',
-          style: AppFont.regular.copyWith(
-            fontSize: 13,
-            color: Colors.black,
-            fontWeight: FontWeight.normal,
-          ),
-        ),
+        // Text(
+        //   'View all',
+        //   style: AppFont.regular.copyWith(
+        //     fontSize: 13,
+        //     color: Colors.black,
+        //     fontWeight: FontWeight.normal,
+        //   ),
+        // ),
       ],
     );
   }

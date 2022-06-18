@@ -1,5 +1,6 @@
 import 'package:fashion_app/src/data/model/order.dart';
 import 'package:fashion_app/src/data/model/product.dart';
+import 'package:fashion_app/src/data/model/produk_model/datum.dart';
 import 'package:fashion_app/src/router/router_path.dart';
 
 import 'package:fashion_app/src/view/screen/add_address_screen.dart';
@@ -24,7 +25,7 @@ class Routerr {
   static RouteFactory onGenerateRouter = (RouteSettings settings) {
     switch (settings.name) {
       case DetailProductScreens:
-        final arg = settings.arguments! as Product;
+        final arg = settings.arguments! as DataProduk;
         return _generateMaterialRoute(DetailProductScreen(
           product: arg,
         ));
