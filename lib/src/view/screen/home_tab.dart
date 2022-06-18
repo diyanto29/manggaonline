@@ -46,6 +46,7 @@ class _HomeTabState extends State<HomeTab> {
             },
             decoration: InputDecoration(
                 prefixIcon: Icon(Icons.search),
+                contentPadding: const EdgeInsets.only(top: 2),
                 hintText: 'Cari Produk Disini...',
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(5))),
