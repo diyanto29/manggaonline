@@ -52,14 +52,18 @@ class _HomeTabState extends State<HomeTab> {
           ),
         ),
       ),
-      body: ListView(
-        children: [
-          HeaderPage(),
-          SizedBox(
-            height: 20,
-          ),
-          BodyPage(),
-        ],
+      body: RefreshIndicator(
+        onRefresh: () =>
+            Provider.of<ProductViewModel>(context, listen: false).getProduct(),
+        child: ListView(
+          children: [
+            HeaderPage(),
+            SizedBox(
+              height: 20,
+            ),
+            BodyPage(),
+          ],
+        ),
       ),
     );
   }
