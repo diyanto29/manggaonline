@@ -234,7 +234,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                       .addKeranjang(widget.product!.id.toString());
                 },
                 child: Text(
-                  "Add to cart".toUpperCase(),
+                  "Tambah Ke Keranjang".toUpperCase(),
                   style: AppFont.medium
                       .copyWith(fontSize: 17, color: Colors.white),
                 ),

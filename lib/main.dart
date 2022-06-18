@@ -39,7 +39,8 @@ class MyApp extends StatelessWidget {
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.deepOrange,
+          accentColor: Colors.deepOrange
         ),
         onGenerateRoute: Routerr.onGenerateRouter,
         home: session.hasData('userID') ? DashBoardScreen() : LoginScreen(),
