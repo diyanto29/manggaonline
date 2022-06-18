@@ -28,6 +28,12 @@ class _SearchProductViewState extends State<SearchProductView> {
     return Consumer<ProductViewModel>(builder: (context, data, _) {
       return Scaffold(
         appBar: AppBar(
+          leading: Image.asset(
+            'assets/images/logo.png',
+            width: 100,
+            height: 100,
+          ),
+          backgroundColor: Colors.deepOrange,
           title: Text('Pencarian Produk'),
           centerTitle: true,
         ),
@@ -45,7 +51,7 @@ class _SearchProductViewState extends State<SearchProductView> {
                     padding: const EdgeInsets.all(16),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        childAspectRatio: 0.6,
+                        childAspectRatio: 0.5,
                         mainAxisSpacing: 10,
                         crossAxisSpacing: 10),
                     itemBuilder: (_, index) {

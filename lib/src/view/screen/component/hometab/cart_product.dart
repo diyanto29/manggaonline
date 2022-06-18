@@ -164,6 +164,17 @@ class _CartProductState extends State<CartProduct> {
             height: 2,
           ),
           Text(
+            "Satuan : ${widget.product!.unit.toString()}",
+            style: AppFont.regular.copyWith(
+              fontSize: 13,
+              color: Colors.grey,
+              fontWeight: FontWeight.normal,
+            ),
+          ),
+          SizedBox(
+            height: 2,
+          ),
+          Text(
             "Rp ${formatCurrency.format(widget.product!.price)}",
             style: AppFont.bold
                 .copyWith(fontSize: 14, color: AppColors.primaryColorRed),

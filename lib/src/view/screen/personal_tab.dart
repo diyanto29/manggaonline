@@ -128,7 +128,7 @@ class _PersonalTabState extends State<PersonalTab> {
               ListTile(
                 //           contentPadding: EdgeInsets.all(0.0),
                 title: Text(
-                  'role',
+                  'Level Pengguna',
                   style: AppFont.semiBold
                       .copyWith(fontWeight: FontWeight.bold, fontSize: 17),
                 ),

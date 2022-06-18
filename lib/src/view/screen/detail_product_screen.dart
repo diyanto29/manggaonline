@@ -133,6 +133,16 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                       height: 8,
                     ),
                     Text(
+                      "Satuan : " + widget.product!.unit.toString(),
+                      style: AppFont.regular.copyWith(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 13,
+                          color: Colors.grey),
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Text(
                       "Berat : " + widget.product!.weigth.toString() + " gram",
                       style: AppFont.regular.copyWith(
                           fontWeight: FontWeight.normal,

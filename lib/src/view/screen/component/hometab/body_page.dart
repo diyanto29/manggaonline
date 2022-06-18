@@ -43,7 +43,7 @@ class _BodyPageState extends State<BodyPage> {
                     shrinkWrap: true,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        childAspectRatio: 0.6,
+                        childAspectRatio: 0.5,
                         mainAxisSpacing: 10,
                         crossAxisSpacing: 10),
                     itemBuilder: (_, index) {

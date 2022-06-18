@@ -23,11 +23,20 @@ class _HomeTabState extends State<HomeTab> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Image.asset(
+            'assets/image/logo.png',
+            width: 20,
+            height: 20,
+          ),
+        ),
+        backgroundColor: Colors.deepOrange,
         automaticallyImplyLeading: false,
         title: Container(
           decoration: BoxDecoration(
               color: Colors.white, borderRadius: BorderRadius.circular(5)),
-          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 20),
           height: 45,
           child: TextField(
             textInputAction: TextInputAction.search,

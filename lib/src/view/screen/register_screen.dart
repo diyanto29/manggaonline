@@ -60,7 +60,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   height: 40,
                 ),
                 TextFieldAddress(
-                    textEditingController: nameController, lableText: "Name"),
+                    textEditingController: nameController,
+                    lableText: "Nama Lengkap"),
                 SizedBox(
                   height: 10,
                 ),
@@ -146,7 +147,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           passController.text.trim());
                     },
                     child: Text(
-                      "sign up".toUpperCase(),
+                      "Daftar Sekarang".toUpperCase(),
                       style: AppFont.medium
                           .copyWith(fontSize: 15, color: Colors.white),
                     ),

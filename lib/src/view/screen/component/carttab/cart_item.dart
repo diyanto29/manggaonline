@@ -45,7 +45,7 @@ class CartItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    dataCart.name ?? '',
+                    dataCart.namaProduk ?? '',
                     overflow: TextOverflow.ellipsis,
                     style: AppFont.semiBold.copyWith(
                         color: Colors.black,
