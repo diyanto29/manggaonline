@@ -271,6 +271,7 @@ class CartViewModel extends ChangeNotifier with DioService {
     });
     Get.back();
     if (res.statusCode == 201) {
+      getCartProduk();
       toast('Berhasil CheckOut', gravity: ToastGravity.CENTER);
 
       Get.to(CheckoutView(url: res.data['data']['url_midtrans']));
