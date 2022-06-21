@@ -13,12 +13,13 @@ class DioService {
         connectTimeout: 60000,
         receiveTimeout: 60000,
         followRedirects: false,
-        baseUrl: 'http://192.168.42.33:8000/api/',
+        baseUrl: 'http://192.168.100.59:8000/api/',
         validateStatus: (status) {
           return status! < 500;
         },
         headers: {
           "Accept": "application/json",
+          "key": "663c5b62a43c42c02133cf72d3c6ea26"
         });
 
     var dio = Dio(options);

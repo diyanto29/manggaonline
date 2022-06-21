@@ -118,6 +118,9 @@ class CartItem extends StatelessWidget {
                             Flexible(
                               child: InkWell(
                                 onTap: () {
+                                  int qty = dataCart.qty! + 1;
+                                  cartViewModel.updateCart(
+                                      dataCart.productsId.toString(), qty);
                                   // cartViewModel.increQuantity(
                                   //     order, order.product!.inventory![0]);
                                 },
@@ -141,6 +144,12 @@ class CartItem extends StatelessWidget {
                             Flexible(
                               child: InkWell(
                                 onTap: () {
+                                  int qty = dataCart.qty! - 1;
+                                  if (qty > 0) {
+                                    cartViewModel.updateCart(
+                                        dataCart.productsId.toString(), qty); 
+                                  }
+
                                   // cartViewModel.deceQuanity(order);
                                 },
                                 child: Icon(

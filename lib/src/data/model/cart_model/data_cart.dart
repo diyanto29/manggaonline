@@ -11,19 +11,20 @@ class DataCart {
   String? createdAt;
   String? updatedAt;
   int? price;
+  int? weigth;
 
-  DataCart({
-    this.namaProduk,
-    this.image,
-    this.name,
-    this.id,
-    this.userId,
-    this.productsId,
-    this.qty,
-    this.createdAt,
-    this.updatedAt,
-    this.price,
-  });
+  DataCart(
+      {this.namaProduk,
+      this.image,
+      this.name,
+      this.id,
+      this.userId,
+      this.productsId,
+      this.qty,
+      this.createdAt,
+      this.updatedAt,
+      this.price,
+      this.weigth});
 
   @override
   String toString() {
@@ -41,6 +42,7 @@ class DataCart {
         createdAt: json['created_at'] as String?,
         updatedAt: json['updated_at'] as String?,
         price: json['price'] as int?,
+        weigth: json['weigth'] as int?,
       );
 
   Map<String, dynamic> toJson() => {
@@ -75,5 +77,6 @@ class DataCart {
       qty.hashCode ^
       createdAt.hashCode ^
       updatedAt.hashCode ^
+      weigth.hashCode ^
       price.hashCode;
 }

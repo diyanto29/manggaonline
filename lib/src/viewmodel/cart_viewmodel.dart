@@ -1,12 +1,27 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:fashion_app/network/dio_service.dart';
 import 'package:fashion_app/src/data/model/address.dart';
 import 'package:fashion_app/src/data/model/cart_model/cart_model.dart';
+import 'package:fashion_app/src/data/model/city_model/city_model.dart';
+import 'package:fashion_app/src/data/model/city_model/result.dart';
+import 'package:fashion_app/src/data/model/cost_model/cost_model.dart';
+import 'package:fashion_app/src/data/model/cost_model/result.dart';
 import 'package:fashion_app/src/data/model/inventory.dart';
 import 'package:fashion_app/src/data/model/cart.dart';
 import 'package:fashion_app/src/data/model/order.dart';
 import 'package:fashion_app/src/data/model/product.dart';
+import 'package:fashion_app/src/data/model/province_model/province_model.dart';
+import 'package:fashion_app/src/data/model/province_model/result.dart';
+import 'package:fashion_app/src/view/screen/component/carttab/checkout.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:nb_utils/nb_utils.dart';
+
+import '../view/screen/component/dialog_loading.dart';
 
 class CartViewModel extends ChangeNotifier with DioService {
   List<Cart> listCart = [];
@@ -15,11 +30,25 @@ class CartViewModel extends ChangeNotifier with DioService {
   String message = '';
   double total = 0;
   int productCount = 0;
+  int adminConst = 4000;
+  int totalWeight = 0;
+  int ongkir = 0;
   List<Order> listOrder = [];
+  List<Result> listProvince = [];
+  ProvinceModel? provinceModel;
+  CityModel? cityModel;
+  CityData? citySelected;
+  CostModel? costModel;
+  CostData? costData;
+  String courier = "jne";
+  int? selectedIndex;
 
+  Result? provinceSelect;
   CartModel? cartModel;
   bool isLoadingCart = true;
   GetStorage session = GetStorage();
+  int totalCart = 0;
+  TextEditingController controllerAddress = TextEditingController();
 
   addToCart(Product product, Inventory inventoryy) {
     productCount = 0;
@@ -121,8 +150,132 @@ class CartViewModel extends ChangeNotifier with DioService {
     isLoadingCart = false;
     notifyListeners();
     if (res.statusCode == 201) {
+      total = 0;
+      totalWeight = 0;
       cartModel = CartModel.fromJson(res.data);
+      cartModel!.data!.forEach((element) {
+        total += (element.qty! * element.price!);
+        totalWeight += element.weigth!;
+      });
+
+      totalCart = total.toInt() + adminConst + ongkir;
       notifyListeners();
+    }
+  }
+
+  Future updateCart(String productId, int qty) async {
+    loadingBuilder();
+
+    final res = await dio
+        .post('updatekranjang', data: {"product_id": productId, "qty": qty});
+    Get.back();
+    if (res.statusCode == 201) {
+      toast('Keranjang Berhasil diupdate', gravity: ToastGravity.CENTER);
+      getCartProduk();
+    } else {
+      toast(res.data['message'], gravity: ToastGravity.CENTER);
+    }
+  }
+
+  Future getProvince() async {
+    provinceModel = null;
+
+    final res = await dio.get(
+      'https://api.rajaongkir.com/starter/province',
+    );
+
+    provinceModel = ProvinceModel.fromJson(res.data);
+    // listProvince.addAll(province.rajaongkir!.results!);
+    notifyListeners();
+  }
+
+  void setProviceSleect(Result value) async {
+    provinceSelect = value;
+    notifyListeners();
+    cityModel = null;
+
+    final res = await dio.get('https://api.rajaongkir.com/starter/city',
+        queryParameters: {"province": provinceSelect!.provinceId.toString()});
+    cityModel = CityModel.fromJson(res.data);
+    notifyListeners();
+  }
+
+  void setCitySelected(CityData data) async {
+    citySelected = data;
+    costModel = null;
+    notifyListeners();
+    final res =
+        await dio.post('https://api.rajaongkir.com/starter/cost', data: {
+      "weight": totalWeight,
+      "courier": courier,
+      "origin": 149,
+      "destination": citySelected!.cityId,
+    });
+
+    costModel = CostModel.fromJson(res.data);
+    notifyListeners();
+  }
+
+  void getCostData(String? v) async {
+    costModel = null;
+    notifyListeners();
+    final res =
+        await dio.post('https://api.rajaongkir.com/starter/cost', data: {
+      "weight": totalWeight,
+      "courier": v ?? courier,
+      "origin": 149,
+      "destination": citySelected!.cityId,
+    });
+
+    costModel = CostModel.fromJson(res.data);
+    notifyListeners();
+  }
+
+  void tapOngkir(CostData data) {
+    costData = data;
+    ongkir = data.costs![0].cost![0]['value'];
+    totalCart = total.toInt() + ongkir + adminConst;
+    notifyListeners();
+  }
+
+  Future deleteCart(String cartID) async {
+    loadingBuilder();
+
+    final res = await dio.post('deletekranjang', data: {"id": cartID});
+    Get.back();
+    if (res.statusCode == 201) {
+      toast('Keranjang Berhasil Hapus', gravity: ToastGravity.CENTER);
+      getCartProduk();
+    } else {
+      toast(res.data['message'], gravity: ToastGravity.CENTER);
+    }
+  }
+
+  Future checkOut() async {
+    loadingBuilder();
+
+    final res = await dio.post('order/simpan', data: {
+      "user_id": session.read('userID'),
+      "invoice": "TRX-" + DateTime.now().microsecondsSinceEpoch.toString(),
+      "subtotal": total,
+      "metode_pembayaran": 'midtrans',
+      "ongkir": ongkir,
+      "biaya_cod": 0,
+      "no_hp": session.read('email'),
+      "pesan": "sesuai aplikasi",
+      "city_name": citySelected!.cityId!,
+      "province_name": citySelected!.province!,
+      "province_id": citySelected!.provinceId,
+      "detail_alamat": controllerAddress.text.trim(),
+      "type": citySelected!.type!,
+    });
+    Get.back();
+    if (res.statusCode == 201) {
+      toast('Berhasil CheckOut', gravity: ToastGravity.CENTER);
+
+      Get.to(CheckoutView(url: res.data['data']['url_midtrans']));
+    } else {
+      toast(res.data['message'], gravity: ToastGravity.CENTER);
     }
   }
 }
