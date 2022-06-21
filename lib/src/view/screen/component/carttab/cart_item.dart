@@ -147,7 +147,7 @@ class CartItem extends StatelessWidget {
                                   int qty = dataCart.qty! - 1;
                                   if (qty > 0) {
                                     cartViewModel.updateCart(
-                                        dataCart.productsId.toString(), qty); 
+                                        dataCart.productsId.toString(), qty);
                                   }
 
                                   // cartViewModel.deceQuanity(order);

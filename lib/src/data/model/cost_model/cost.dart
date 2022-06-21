@@ -17,8 +17,7 @@ class Cost {
   factory Cost.fromJson(Map<String, dynamic> json) => Cost(
         service: json['service'] as String?,
         description: json['description'] as String?,
-        cost: (json['cost'] as List<dynamic>?)
-            ,
+        cost: (json['cost'] as List<dynamic>?),
       );
 
   Map<String, dynamic> toJson() => {

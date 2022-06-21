@@ -14,6 +14,7 @@ import 'package:fashion_app/src/data/model/order.dart';
 import 'package:fashion_app/src/data/model/product.dart';
 import 'package:fashion_app/src/data/model/province_model/province_model.dart';
 import 'package:fashion_app/src/data/model/province_model/result.dart';
+import 'package:fashion_app/src/data/model/transaksi_model/transaksi_model.dart';
 import 'package:fashion_app/src/view/screen/component/carttab/checkout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -49,6 +50,7 @@ class CartViewModel extends ChangeNotifier with DioService {
   GetStorage session = GetStorage();
   int totalCart = 0;
   TextEditingController controllerAddress = TextEditingController();
+  TransaksiModel? transaksiModel;
 
   addToCart(Product product, Inventory inventoryy) {
     productCount = 0;
@@ -252,6 +254,10 @@ class CartViewModel extends ChangeNotifier with DioService {
   }
 
   Future checkOut() async {
+    if (citySelected == null) {
+      toast('Alamat Wajib Disi', gravity: ToastGravity.TOP);
+      return;
+    }
     loadingBuilder();
 
     final res = await dio.post('order/simpan', data: {
@@ -278,5 +284,11 @@ class CartViewModel extends ChangeNotifier with DioService {
     } else {
       toast(res.data['message'], gravity: ToastGravity.CENTER);
     }
+  }
+
+  Future getTransaksi() async {
+    final res = await dio.get("transaksi/${session.read('userID')}");
+    transaksiModel = TransaksiModel.fromJson(res.data);
+    notifyListeners();
   }
 }
