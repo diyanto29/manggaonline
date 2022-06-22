@@ -235,7 +235,8 @@ class _CategoryTabState extends State<CategoryTab> {
                               },
                             ),
                             10.height,
-                            if (data.statusOrderId != 1)
+                            if (data.statusOrderId != 1 &&
+                                data.statusOrderId != 5)
                               SizedBox(
                                   width: double.infinity,
                                   height: 50,
