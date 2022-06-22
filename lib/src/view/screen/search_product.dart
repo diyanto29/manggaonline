@@ -28,10 +28,13 @@ class _SearchProductViewState extends State<SearchProductView> {
     return Consumer<ProductViewModel>(builder: (context, data, _) {
       return Scaffold(
         appBar: AppBar(
-          leading: Image.asset(
-            'assets/images/logo.png',
-            width: 100,
-            height: 100,
+          leading: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(
+              'assets/image/logo.png',
+              width: 20,
+              height: 20,
+            ),
           ),
           backgroundColor: Colors.deepOrange,
           title: Text('Pencarian Produk'),
@@ -58,11 +61,11 @@ class _SearchProductViewState extends State<SearchProductView> {
                       return InkWell(
                         onTap: () {
                           Navigator.pushNamed(context, DetailProductScreens,
-                              arguments: data.productModel?.data![index]);
+                              arguments: data.searchProduct?.data![index]);
                         },
                         child: CartProduct(
                           index: index,
-                          product: data.productModel?.data![index],
+                          product: data.searchProduct?.data![index],
                         ),
                       );
                     },

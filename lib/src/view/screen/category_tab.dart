@@ -42,229 +42,232 @@ class _CategoryTabState extends State<CategoryTab> {
                 child: Text('Data Transaksi Kosong'),
               );
             } else {
-              return ListView.builder(
-                padding: const EdgeInsets.all(16),
-                itemCount: value.transaksiModel!.data!.length,
-                itemBuilder: (context, index) {
-                  var data = value.transaksiModel!.data![index];
-                  return InkWell(
-                    onTap: () {
-                      if (data.statusOrder!.id == 1) {
-                        Get.to(CheckoutView(url: data.urlMidtrans!));
-                      }
-                    },
-                    child: Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  data.invoice ?? '',
-                                  style: boldTextStyle(size: 12),
-                                ),
-                                5.height,
-                                Container(
-                                  padding: const EdgeInsets.all(4),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      color: Colors.green),
-                                  child: Text(
-                                    data.statusOrder?.name ?? '',
-                                    style: primaryTextStyle(
-                                      size: 12,
-                                      color: Colors.white,
-                                    ),
+              return RefreshIndicator(
+                onRefresh: ()=> value.getTransaksi(),
+                child: ListView.builder(
+                  padding: const EdgeInsets.all(16),
+                  itemCount: value.transaksiModel!.data!.length,
+                  itemBuilder: (context, index) {
+                    var data = value.transaksiModel!.data![index];
+                    return InkWell(
+                      onTap: () {
+                        if (data.statusOrder!.id == 1) {
+                          Get.to(CheckoutView(url: data.urlMidtrans!));
+                        }
+                      },
+                      child: Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    data.invoice ?? '',
+                                    style: boldTextStyle(size: 12),
                                   ),
-                                ),
-                              ],
-                            ),
-                            10.height,
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'No Resi',
-                                  style: secondaryTextStyle(size: 12),
-                                ),
-                                5.height,
-                                Text(
-                                  data.noResi ?? '',
-                                  style: boldTextStyle(size: 12),
-                                ),
-                              ],
-                            ),
-                            10.height,
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Metode Pembayaran',
-                                  style: secondaryTextStyle(size: 12),
-                                ),
-                                5.height,
-                                Text(
-                                  data.metodePembayaran ?? '',
-                                  style: boldTextStyle(size: 12),
-                                ),
-                              ],
-                            ),
-                            10.height,
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Total',
-                                  style: secondaryTextStyle(size: 12),
-                                ),
-                                5.height,
-                                Text(
-                                  "Rp ${formatCurrency.format(data.subtotal)}",
-                                  style: boldTextStyle(size: 12),
-                                ),
-                              ],
-                            ),
-                            10.height,
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Ongkir',
-                                  style: secondaryTextStyle(size: 12),
-                                ),
-                                5.height,
-                                Text(
-                                  "Rp ${formatCurrency.format(data.ongkir)}",
-                                  style: boldTextStyle(size: 12),
-                                ),
-                              ],
-                            ),
-                            10.height,
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Biaya Admin',
-                                  style: secondaryTextStyle(size: 12),
-                                ),
-                                5.height,
-                                Text(
-                                  "Rp ${formatCurrency.format(4000)}",
-                                  style: boldTextStyle(size: 12),
-                                ),
-                              ],
-                            ),
-                            10.height,
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Total Belanja',
-                                  style: secondaryTextStyle(size: 12),
-                                ),
-                                5.height,
-                                Text(
-                                  "Rp ${formatCurrency.format(data.subtotal! + 4000 + data.ongkir!)}",
-                                  style: boldTextStyle(size: 12),
-                                ),
-                              ],
-                            ),
-                            10.height,
-                            Divider(),
-                            5.height,
-                            Text(
-                              'Detail Alamat',
-                              style: boldTextStyle(size: 12),
-                            ),
-                            5.height,
-                            Text(
-                                '${data.detailAlamat} ${data.type} ${data.cityName} Provinsi ${data.provinceName}'),
-                            10.height,
-                            Divider(),
-                            5.height,
-                            Text(
-                              'Produk yang dibeli',
-                              style: boldTextStyle(size: 12),
-                            ),
-                            5.height,
-                            ListView.builder(
-                              shrinkWrap: true,
-                              physics: ClampingScrollPhysics(),
-                              itemCount: data.detailTransaksi!.length,
-                              itemBuilder: (c, i) {
-                                var produk = data.detailTransaksi![i];
-
-                                return ListTile(
-                                  leading: Container(
-                                    width: 50,
-                                    height: 50,
+                                  5.height,
+                                  Container(
+                                    padding: const EdgeInsets.all(4),
                                     decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: NetworkImage(
-                                            EndPoint.photoUrl +
-                                                produk.product!.image!,
-                                          ),
-                                          fit: BoxFit.cover),
-                                      borderRadius: BorderRadius.circular(100),
-                                    ),
-                                  ),
-                                  title: Text(
-                                    produk.product?.name ?? '',
-                                    style: boldTextStyle(size: 12),
-                                  ),
-                                  subtitle: Text(
-                                    "${produk.qty} x ${formatCurrency.format(produk.product!.price!)}",
-                                    style: primaryTextStyle(size: 12),
-                                  ),
-                                  trailing: Text(
-                                    "Rp ${formatCurrency.format(produk.qty! * produk.product!.price!)}",
-                                    style: boldTextStyle(size: 12),
-                                  ),
-                                );
-                              },
-                            ),
-                            10.height,
-                            if (data.statusOrderId != 1 &&
-                                data.statusOrderId != 5)
-                              SizedBox(
-                                  width: double.infinity,
-                                  height: 50,
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      primary: AppColors.primaryColorRed,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(40.0),
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: Colors.green),
+                                    child: Text(
+                                      data.statusOrder?.name ?? '',
+                                      style: primaryTextStyle(
+                                        size: 12,
+                                        color: Colors.white,
                                       ),
                                     ),
-                                    onPressed: () {
-                                      value.confirm(data.id.toString());
-                                      // String? size = product.inventory![productViewModel.selectIndex].size;
-                                      // String? color = product.inventory![productViewModel.selectIndex].color;
-                                    },
-                                    child: Text(
-                                      "Konfirmasi Barang Diterima",
-                                      style: AppFont.medium.copyWith(
-                                          fontSize: 17, color: Colors.white),
+                                  ),
+                                ],
+                              ),
+                              10.height,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'No Resi',
+                                    style: secondaryTextStyle(size: 12),
+                                  ),
+                                  5.height,
+                                  Text(
+                                    data.noResi ?? '',
+                                    style: boldTextStyle(size: 12),
+                                  ),
+                                ],
+                              ),
+                              10.height,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Metode Pembayaran',
+                                    style: secondaryTextStyle(size: 12),
+                                  ),
+                                  5.height,
+                                  Text(
+                                    data.metodePembayaran ?? '',
+                                    style: boldTextStyle(size: 12),
+                                  ),
+                                ],
+                              ),
+                              10.height,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Total',
+                                    style: secondaryTextStyle(size: 12),
+                                  ),
+                                  5.height,
+                                  Text(
+                                    "Rp ${formatCurrency.format(data.subtotal)}",
+                                    style: boldTextStyle(size: 12),
+                                  ),
+                                ],
+                              ),
+                              10.height,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Ongkir',
+                                    style: secondaryTextStyle(size: 12),
+                                  ),
+                                  5.height,
+                                  Text(
+                                    "Rp ${formatCurrency.format(data.ongkir)}",
+                                    style: boldTextStyle(size: 12),
+                                  ),
+                                ],
+                              ),
+                              10.height,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Biaya Admin',
+                                    style: secondaryTextStyle(size: 12),
+                                  ),
+                                  5.height,
+                                  Text(
+                                    "Rp ${formatCurrency.format(4000)}",
+                                    style: boldTextStyle(size: 12),
+                                  ),
+                                ],
+                              ),
+                              10.height,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Total Belanja',
+                                    style: secondaryTextStyle(size: 12),
+                                  ),
+                                  5.height,
+                                  Text(
+                                    "Rp ${formatCurrency.format(data.subtotal! + 4000 + data.ongkir!)}",
+                                    style: boldTextStyle(size: 12),
+                                  ),
+                                ],
+                              ),
+                              10.height,
+                              Divider(),
+                              5.height,
+                              Text(
+                                'Detail Alamat',
+                                style: boldTextStyle(size: 12),
+                              ),
+                              5.height,
+                              Text(
+                                  '${data.detailAlamat} ${data.type} ${data.cityName} Provinsi ${data.provinceName}'),
+                              10.height,
+                              Divider(),
+                              5.height,
+                              Text(
+                                'Produk yang dibeli',
+                                style: boldTextStyle(size: 12),
+                              ),
+                              5.height,
+                              ListView.builder(
+                                shrinkWrap: true,
+                                physics: ClampingScrollPhysics(),
+                                itemCount: data.detailTransaksi!.length,
+                                itemBuilder: (c, i) {
+                                  var produk = data.detailTransaksi![i];
+              
+                                  return ListTile(
+                                    leading: Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: NetworkImage(
+                                              EndPoint.photoUrl +
+                                                  produk.product!.image!,
+                                            ),
+                                            fit: BoxFit.cover),
+                                        borderRadius: BorderRadius.circular(100),
+                                      ),
                                     ),
-                                  )),
-                          ],
+                                    title: Text(
+                                      produk.product?.name ?? '',
+                                      style: boldTextStyle(size: 12),
+                                    ),
+                                    subtitle: Text(
+                                      "${produk.qty} x ${formatCurrency.format(produk.product!.price!)}",
+                                      style: primaryTextStyle(size: 12),
+                                    ),
+                                    trailing: Text(
+                                      "Rp ${formatCurrency.format(produk.qty! * produk.product!.price!)}",
+                                      style: boldTextStyle(size: 12),
+                                    ),
+                                  );
+                                },
+                              ),
+                              10.height,
+                              if (data.statusOrderId != 1 &&
+                                  data.statusOrderId != 5)
+                                SizedBox(
+                                    width: double.infinity,
+                                    height: 50,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        primary: AppColors.primaryColorRed,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(40.0),
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        value.confirm(data.id.toString());
+                                        // String? size = product.inventory![productViewModel.selectIndex].size;
+                                        // String? color = product.inventory![productViewModel.selectIndex].color;
+                                      },
+                                      child: Text(
+                                        "Konfirmasi Barang Diterima",
+                                        style: AppFont.medium.copyWith(
+                                            fontSize: 17, color: Colors.white),
+                                      ),
+                                    )),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               );
             }
           }
