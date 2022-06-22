@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
+import '../../const/app_colors.dart';
+import '../../const/app_font.dart';
 import '../../const/endpoint.dart';
 import 'component/carttab/checkout.dart';
 
@@ -88,6 +90,22 @@ class _CategoryTabState extends State<CategoryTab> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
+                                  'No Resi',
+                                  style: secondaryTextStyle(size: 12),
+                                ),
+                                5.height,
+                                Text(
+                                  data.noResi ?? '',
+                                  style: boldTextStyle(size: 12),
+                                ),
+                              ],
+                            ),
+                            10.height,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
                                   'Metode Pembayaran',
                                   style: secondaryTextStyle(size: 12),
                                 ),
@@ -147,6 +165,22 @@ class _CategoryTabState extends State<CategoryTab> {
                               ],
                             ),
                             10.height,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Total Belanja',
+                                  style: secondaryTextStyle(size: 12),
+                                ),
+                                5.height,
+                                Text(
+                                  "Rp ${formatCurrency.format(data.subtotal! + 4000 + data.ongkir!)}",
+                                  style: boldTextStyle(size: 12),
+                                ),
+                              ],
+                            ),
+                            10.height,
                             Divider(),
                             5.height,
                             Text(
@@ -199,7 +233,29 @@ class _CategoryTabState extends State<CategoryTab> {
                                   ),
                                 );
                               },
-                            )
+                            ),
+                            10.height,
+                            SizedBox(
+                                width: double.infinity,
+                                height: 50,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: AppColors.primaryColorRed,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(40.0),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    value.confirm(data.id.toString());
+                                    // String? size = product.inventory![productViewModel.selectIndex].size;
+                                    // String? color = product.inventory![productViewModel.selectIndex].color;
+                                  },
+                                  child: Text(
+                                    "Konfirmasi Barang Diterima",
+                                    style: AppFont.medium.copyWith(
+                                        fontSize: 17, color: Colors.white),
+                                  ),
+                                )),
                           ],
                         ),
                       ),

@@ -253,6 +253,19 @@ class CartViewModel extends ChangeNotifier with DioService {
     }
   }
 
+  Future confirm(String idTransaksi) async {
+    loadingBuilder();
+
+    final res = await dio.post('confirm', data: {"id": idTransaksi});
+    Get.back();
+    if (res.statusCode == 201) {
+      toast(res.data['message'], gravity: ToastGravity.CENTER);
+      getTransaksi();
+    } else {
+      toast(res.data['message'], gravity: ToastGravity.CENTER);
+    }
+  }
+
   Future checkOut() async {
     if (citySelected == null) {
       toast('Alamat Wajib Disi', gravity: ToastGravity.TOP);
