@@ -93,14 +93,14 @@ class _PersonalTabState extends State<PersonalTab> {
                       fontSize: 13,
                       color: Colors.grey),
                 ),
-                trailing: IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.arrow_forward_ios,
-                    size: 18,
-                    color: Colors.grey,
-                  ),
-                ),
+                // trailing: IconButton(
+                //   onPressed: () {},
+                //   icon: Icon(
+                //     Icons.arrow_forward_ios,
+                //     size: 18,
+                //     color: Colors.grey,
+                //   ),
+                // ),
               ),
               ListTile(
                 //           contentPadding: EdgeInsets.all(0.0),
@@ -116,14 +116,14 @@ class _PersonalTabState extends State<PersonalTab> {
                       fontSize: 13,
                       color: Colors.grey),
                 ),
-                trailing: IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.arrow_forward_ios,
-                    size: 18,
-                    color: Colors.grey,
-                  ),
-                ),
+                // trailing: IconButton(
+                //   onPressed: () {},
+                //   icon: Icon(
+                //     Icons.arrow_forward_ios,
+                //     size: 18,
+                //     color: Colors.grey,
+                //   ),
+                // ),
               ),
               ListTile(
                 //           contentPadding: EdgeInsets.all(0.0),
@@ -139,14 +139,14 @@ class _PersonalTabState extends State<PersonalTab> {
                       fontSize: 13,
                       color: Colors.grey),
                 ),
-                trailing: IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.arrow_forward_ios,
-                    size: 18,
-                    color: Colors.grey,
-                  ),
-                ),
+                // trailing: IconButton(
+                //   onPressed: () {},
+                //   icon: Icon(
+                //     Icons.arrow_forward_ios,
+                //     size: 18,
+                //     color: Colors.grey,
+                //   ),
+                // ),
               ),
               ListTile(
                 //           contentPadding: EdgeInsets.all(0.0),
@@ -169,14 +169,14 @@ class _PersonalTabState extends State<PersonalTab> {
                       fontSize: 13,
                       color: Colors.grey),
                 ),
-                trailing: IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.arrow_forward_ios,
-                    size: 18,
-                    color: Colors.grey,
-                  ),
-                ),
+                // trailing: IconButton(
+                //   onPressed: () {},
+                //   icon: Icon(
+                //     Icons.arrow_forward_ios,
+                //     size: 18,
+                //     color: Colors.grey,
+                //   ),
+                // ),
               ),
             ],
           ))

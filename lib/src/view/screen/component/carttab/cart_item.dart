@@ -44,13 +44,24 @@ class CartItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    dataCart.namaProduk ?? '',
-                    overflow: TextOverflow.ellipsis,
-                    style: AppFont.semiBold.copyWith(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        dataCart.namaProduk ?? '',
+                        overflow: TextOverflow.ellipsis,
+                        style: AppFont.semiBold.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            cartViewModel.deleteCart(dataCart.id.toString());
+                          },
+                          icon: Icon(Icons.delete))
+                    ],
                   ),
                   SizedBox(
                     height: 10,
