@@ -5,9 +5,13 @@ import 'package:fashion_app/src/data/model/cost_model/result.dart';
 import 'package:fashion_app/src/data/model/province_model/result.dart';
 import 'package:fashion_app/src/viewmodel/cart_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
+
+import '../../../../const/app_colors.dart';
+import '../../../../const/app_font.dart';
 
 class AddressView extends StatefulWidget {
   const AddressView({Key? key}) : super(key: key);
@@ -138,6 +142,28 @@ class _AddressViewState extends State<AddressView> {
                         )
                     ],
                   ),
+                  20.height,
+                  SizedBox(
+                      width: double.infinity,
+                      height: 50,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: AppColors.primaryColorRed,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(40.0),
+                          ),
+                        ),
+                        onPressed: () {
+                          Get.back();
+                          // String? size = product.inventory![productViewModel.selectIndex].size;
+                          // String? color = product.inventory![productViewModel.selectIndex].color;
+                        },
+                        child: Text(
+                          "Lanjut",
+                          style: AppFont.medium
+                              .copyWith(fontSize: 17, color: Colors.white),
+                        ),
+                      )),
                 ],
               );
             }),
