@@ -235,27 +235,29 @@ class _CategoryTabState extends State<CategoryTab> {
                               },
                             ),
                             10.height,
-                            SizedBox(
-                                width: double.infinity,
-                                height: 50,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    primary: AppColors.primaryColorRed,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(40.0),
+                            if (data.statusOrderId != 1)
+                              SizedBox(
+                                  width: double.infinity,
+                                  height: 50,
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary: AppColors.primaryColorRed,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(40.0),
+                                      ),
                                     ),
-                                  ),
-                                  onPressed: () {
-                                    value.confirm(data.id.toString());
-                                    // String? size = product.inventory![productViewModel.selectIndex].size;
-                                    // String? color = product.inventory![productViewModel.selectIndex].color;
-                                  },
-                                  child: Text(
-                                    "Konfirmasi Barang Diterima",
-                                    style: AppFont.medium.copyWith(
-                                        fontSize: 17, color: Colors.white),
-                                  ),
-                                )),
+                                    onPressed: () {
+                                      value.confirm(data.id.toString());
+                                      // String? size = product.inventory![productViewModel.selectIndex].size;
+                                      // String? color = product.inventory![productViewModel.selectIndex].color;
+                                    },
+                                    child: Text(
+                                      "Konfirmasi Barang Diterima",
+                                      style: AppFont.medium.copyWith(
+                                          fontSize: 17, color: Colors.white),
+                                    ),
+                                  )),
                           ],
                         ),
                       ),
