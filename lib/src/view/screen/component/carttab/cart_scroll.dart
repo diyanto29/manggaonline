@@ -83,6 +83,16 @@ class CartScroll extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
+                        session.read('no_hp'),
+                        style: AppFont.medium.copyWith(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
                         data.courier.toUpperCase(),
                         style: AppFont.regular.copyWith(
                           fontWeight: FontWeight.w400,
@@ -117,6 +127,7 @@ class CartScroll extends StatelessWidget {
                 ),
                 ListView.builder(
                   shrinkWrap: true,
+                  physics: ClampingScrollPhysics(),
                   padding: EdgeInsets.all(0.0),
                   itemCount: listCart.length,
                   itemBuilder: (_, index) {
@@ -175,28 +186,28 @@ class CartScroll extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                Row(
-                  children: [
-                    Text(
-                      "Biaya Admin",
-                      style: AppFont.medium.copyWith(
-                          fontWeight: FontWeight.normal,
-                          fontSize: 15,
-                          color: AppColors.primaryColorGray),
-                    ),
-                    Spacer(),
-                    Text(
-                      "Rp ${formatCurrency.format(data.adminConst)}",
-                      style: AppFont.semiBold.copyWith(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 15,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
+                // Row(
+                //   children: [
+                //     Text(
+                //       "Biaya Admin",
+                //       style: AppFont.medium.copyWith(
+                //           fontWeight: FontWeight.normal,
+                //           fontSize: 15,
+                //           color: AppColors.primaryColorGray),
+                //     ),
+                //     Spacer(),
+                //     Text(
+                //       "Rp ${formatCurrency.format(data.adminConst)}",
+                //       style: AppFont.semiBold.copyWith(
+                //         fontWeight: FontWeight.w600,
+                //         fontSize: 15,
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                // SizedBox(
+                //   height: 20,
+                // ),
                 Row(
                   children: [
                     Text(
@@ -265,7 +276,7 @@ class CartScroll extends StatelessWidget {
                       height: 5,
                     ),
                     Text(
-                      "Rp ${formatCurrency.format(data.adminConst + data.ongkir + data.total)}",
+                      "Rp ${formatCurrency.format(data.ongkir + data.total)}",
                       style: AppFont.semiBold
                           .copyWith(fontSize: 17, fontWeight: FontWeight.w600),
                     ),

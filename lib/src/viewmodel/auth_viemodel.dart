@@ -11,6 +11,7 @@ class AuthViewModel extends ChangeNotifier with DioService {
   bool isLoggedIn = false;
   bool isLoading = false;
   GetStorage session = GetStorage();
+  String? username, noHp, email;
 
   Future login() async {
     isLoggedIn = true;
@@ -36,6 +37,7 @@ class AuthViewModel extends ChangeNotifier with DioService {
         session.write('username', data['name']);
         session.write('email', data['email']);
         session.write('role', data['role']);
+        session.write('no_hp', data['no_hp']);
         Get.offAll(DashBoardScreen());
       } else {
         toast('Email atau password Salah', gravity: ToastGravity.TOP);
@@ -45,8 +47,9 @@ class AuthViewModel extends ChangeNotifier with DioService {
     }
   }
 
-  Future register(String name, String email, String password) async {
-    if (name.isEmpty || email.isEmpty || password.isEmpty) {
+  Future register(
+      String name, String email, String password, String noHp) async {
+    if (name.isEmpty || email.isEmpty || password.isEmpty || noHp.isEmpty) {
       toast('Form tidak boleh kosong', gravity: ToastGravity.TOP);
       return;
     }
@@ -55,7 +58,8 @@ class AuthViewModel extends ChangeNotifier with DioService {
       "email": email,
       "password": password,
       "name": name,
-      "role": 'customer'
+      "role": 'customer',
+      "no_hp": noHp,
     });
     Get.back();
     if (res.statusCode == 201) {
@@ -65,6 +69,7 @@ class AuthViewModel extends ChangeNotifier with DioService {
         session.write('username', data['name']);
         session.write('email', data['email']);
         session.write('role', data['role']);
+        session.write('no_hp', data['no_hp']);
         Get.offAll(DashBoardScreen());
         toast('Register Berhasil', gravity: ToastGravity.TOP);
       } else {
@@ -73,5 +78,46 @@ class AuthViewModel extends ChangeNotifier with DioService {
     } else {
       toast('Register Gagal', gravity: ToastGravity.TOP);
     }
+  }
+
+  Future updateUser(String name, String email, String noHp) async {
+    if (name.isEmpty || email.isEmpty || noHp.isEmpty) {
+      toast('Form tidak boleh kosong', gravity: ToastGravity.TOP);
+      return;
+    }
+    loadingBuilder();
+    final res = await dio.post('updateUser', data: {
+      "email": email,
+      "name": name,
+      "no_hp": noHp,
+    }, queryParameters: {
+      "id": session.read('userID')
+    });
+    Get.back();
+    if (res.statusCode == 200) {
+      // if (res.data['success']) {
+      var data = res.data['data'];
+      session.write('userID', data['id']);
+      session.write('username', data['name']);
+      session.write('email', data['email']);
+      session.write('role', data['role']);
+      session.write('no_hp', data['no_hp']);
+      getSession();
+      Get.back();
+
+      toast('Data Berhasil di update', gravity: ToastGravity.TOP);
+      // // } else {
+      //   toast('Register Gagal', gravity: ToastGravity.TOP);
+      // }
+    } else {
+      toast('Register Gagal', gravity: ToastGravity.TOP);
+    }
+  }
+
+  void getSession() {
+    username = session.read('username');
+    noHp = session.read('no_hp');
+    email = session.read('email');
+    notifyListeners();
   }
 }

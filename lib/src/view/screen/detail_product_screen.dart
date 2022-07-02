@@ -18,7 +18,10 @@ import 'package:fashion_app/src/viewmodel/product_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+
+import 'cart_tab.dart';
 
 class DetailProductScreen extends StatefulWidget {
   final DataProduk? product;
@@ -222,22 +225,48 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
             ]),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: AppColors.primaryColorRed,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(40.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Flexible(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: AppColors.primaryColorRed,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40.0),
+                        ),
+                      ),
+                      onPressed: () {
+                        Provider.of<ProductViewModel>(ctx, listen: false)
+                            .addKeranjang(widget.product!.id.toString());
+                      },
+                      child: Text(
+                        "Tambah Ke Keranjang".toUpperCase(),
+                        style: AppFont.medium
+                            .copyWith(fontSize: 10, color: Colors.white),
+                      ),
+                    ),
                   ),
-                ),
-                onPressed: () {
-                  Provider.of<ProductViewModel>(ctx, listen: false)
-                      .addKeranjang(widget.product!.id.toString());
-                },
-                child: Text(
-                  "Tambah Ke Keranjang".toUpperCase(),
-                  style: AppFont.medium
-                      .copyWith(fontSize: 17, color: Colors.white),
-                ),
+                  Flexible(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.deepOrange,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40.0),
+                        ),
+                      ),
+                      onPressed: () {
+                        Get.to(CartTab());
+                      },
+                      child: Text(
+                        "Beli Sekarang".toUpperCase(),
+                        style: AppFont.medium
+                            .copyWith(fontSize: 12, color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           );
@@ -394,28 +423,60 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 50,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: AppColors.primaryColorRed,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(40.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: double.infinity,
+                          height: 50,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: AppColors.primaryColorRed,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(40.0),
+                              ),
+                            ),
+                            onPressed: () {
+                              // String? size = product.inventory![productViewModel.selectIndex].size;
+                              // String? color = product.inventory![productViewModel.selectIndex].color;
+                              Provider.of<ProductViewModel>(ctx, listen: false)
+                                  .addKeranjang(product!.id!);
+                            },
+                            child: Text(
+                              "Add to cart".toUpperCase(),
+                              style: AppFont.medium
+                                  .copyWith(fontSize: 17, color: Colors.white),
+                            ),
                           ),
                         ),
-                        onPressed: () {
-                          // String? size = product.inventory![productViewModel.selectIndex].size;
-                          // String? color = product.inventory![productViewModel.selectIndex].color;
-                          Provider.of<ProductViewModel>(ctx, listen: false)
-                              .addKeranjang(product!.id!);
-                        },
-                        child: Text(
-                          "Add to cart".toUpperCase(),
-                          style: AppFont.medium
-                              .copyWith(fontSize: 17, color: Colors.white),
+                        SizedBox(
+                          width: 10,
                         ),
-                      ),
+                        SizedBox(
+                          width: double.infinity,
+                          height: 50,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: AppColors.primaryColorRed,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(40.0),
+                              ),
+                            ),
+                            onPressed: () {
+                              // String? size = product.inventory![productViewModel.selectIndex].size;
+                              // String? color = product.inventory![productViewModel.selectIndex].color;
+                              Provider.of<ProductViewModel>(ctx, listen: false)
+                                  .addKeranjang(product!.id!);
+                            },
+                            child: Text(
+                              "Beli Sekarang".toUpperCase(),
+                              style: AppFont.medium
+                                  .copyWith(fontSize: 17, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

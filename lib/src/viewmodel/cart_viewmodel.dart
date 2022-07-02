@@ -266,6 +266,33 @@ class CartViewModel extends ChangeNotifier with DioService {
     }
   }
 
+  Future callbackMidtrans(String idTransaksi) async {
+    loadingBuilder();
+
+    final res =
+        await dio.post('notificationMidtrans', data: {"id": idTransaksi});
+    Get.back();
+    if (res.statusCode == 201) {
+      toast(res.data['message'], gravity: ToastGravity.CENTER);
+      getTransaksi();
+    } else {
+      toast(res.data['message'], gravity: ToastGravity.CENTER);
+    }
+  }
+
+  Future cancelOrder(String idTransaksi) async {
+    loadingBuilder();
+
+    final res = await dio.post('cancel', data: {"id": idTransaksi});
+    Get.back();
+    if (res.statusCode == 201) {
+      toast(res.data['message'], gravity: ToastGravity.CENTER);
+      getTransaksi();
+    } else {
+      toast(res.data['message'], gravity: ToastGravity.CENTER);
+    }
+  }
+
   Future checkOut() async {
     if (citySelected == null) {
       toast('Alamat Wajib Disi', gravity: ToastGravity.TOP);
@@ -280,9 +307,10 @@ class CartViewModel extends ChangeNotifier with DioService {
       "metode_pembayaran": 'midtrans',
       "ongkir": ongkir,
       "biaya_cod": 0,
-      "no_hp": session.read('email'),
+      "no_hp": session.read('no_hp'),
       "pesan": "sesuai aplikasi",
-      "city_name": citySelected!.cityId!,
+      "city_name": citySelected!.cityName!,
+      "city_id": citySelected!.cityId!,
       "province_name": citySelected!.province!,
       "province_id": citySelected!.provinceId,
       "detail_alamat": controllerAddress.text.trim(),

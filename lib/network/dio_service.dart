@@ -13,7 +13,7 @@ class DioService {
         connectTimeout: 60000,
         receiveTimeout: 60000,
         followRedirects: false,
-        baseUrl: 'http://192.168.100.59:8000/api/',
+        baseUrl: 'http://192.168.250.33:8000/api/',
         validateStatus: (status) {
           return status! < 500;
         },

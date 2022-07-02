@@ -1,9 +1,11 @@
 import 'dart:math';
 
 import 'package:fashion_app/main.dart';
+import 'package:fashion_app/src/view/screen/component/carttab/pay_screen.dart';
 import 'package:fashion_app/src/viewmodel/cart_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
@@ -43,10 +45,12 @@ class _CategoryTabState extends State<CategoryTab> {
               );
             } else {
               return RefreshIndicator(
-                onRefresh: ()=> value.getTransaksi(),
+                onRefresh: () => value.getTransaksi(),
+                triggerMode: RefreshIndicatorTriggerMode.anywhere,
                 child: ListView.builder(
                   padding: const EdgeInsets.all(16),
                   itemCount: value.transaksiModel!.data!.length,
+                  physics: ClampingScrollPhysics(),
                   itemBuilder: (context, index) {
                     var data = value.transaksiModel!.data![index];
                     return InkWell(
@@ -63,7 +67,8 @@ class _CategoryTabState extends State<CategoryTab> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
@@ -88,7 +93,52 @@ class _CategoryTabState extends State<CategoryTab> {
                               ),
                               10.height,
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Tanggal Transaksi',
+                                    style: boldTextStyle(size: 12),
+                                  ),
+                                  5.height,
+                                  Container(
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: Colors.green),
+                                    child: Text(
+                                      DateFormat('dd-MMMM-yyyy', 'id')
+                                          .format(data.createdAt!),
+                                      style: primaryTextStyle(
+                                        size: 12,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              10.height,
+                              // Row(
+                              //   mainAxisAlignment:
+                              //       MainAxisAlignment.spaceBetween,
+                              //   crossAxisAlignment: CrossAxisAlignment.center,
+                              //   children: [
+                              //     Text(
+                              //       'Alamat Pengiriman',
+                              //       style: secondaryTextStyle(size: 12),
+                              //     ),
+                              //     5.height,
+                              //     Text(
+                              //       "${data.detailAlamat} - ${data.cityName} - ${data.provinceName}",
+                              //       style: boldTextStyle(size: 12),
+                              //     ),
+                              //   ],
+                              // ),
+                              // 10.height,
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
@@ -104,7 +154,8 @@ class _CategoryTabState extends State<CategoryTab> {
                               ),
                               10.height,
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
@@ -120,7 +171,25 @@ class _CategoryTabState extends State<CategoryTab> {
                               ),
                               10.height,
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Kurir',
+                                    style: secondaryTextStyle(size: 12),
+                                  ),
+                                  5.height,
+                                  Text(
+                                    'JNE',
+                                    style: boldTextStyle(size: 12),
+                                  ),
+                                ],
+                              ),
+                              10.height,
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
@@ -136,7 +205,8 @@ class _CategoryTabState extends State<CategoryTab> {
                               ),
                               10.height,
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
@@ -150,25 +220,26 @@ class _CategoryTabState extends State<CategoryTab> {
                                   ),
                                 ],
                               ),
+                              // 10.height,
+                              // Row(
+                              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              //   crossAxisAlignment: CrossAxisAlignment.center,
+                              //   children: [
+                              //     Text(
+                              //       'Biaya Admin',
+                              //       style: secondaryTextStyle(size: 12),
+                              //     ),
+                              //     5.height,
+                              //     Text(
+                              //       "Rp ${formatCurrency.format(4000)}",
+                              //       style: boldTextStyle(size: 12),
+                              //     ),
+                              //   ],
+                              // ),
                               10.height,
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Biaya Admin',
-                                    style: secondaryTextStyle(size: 12),
-                                  ),
-                                  5.height,
-                                  Text(
-                                    "Rp ${formatCurrency.format(4000)}",
-                                    style: boldTextStyle(size: 12),
-                                  ),
-                                ],
-                              ),
-                              10.height,
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
@@ -177,7 +248,7 @@ class _CategoryTabState extends State<CategoryTab> {
                                   ),
                                   5.height,
                                   Text(
-                                    "Rp ${formatCurrency.format(data.subtotal! + 4000 + data.ongkir!)}",
+                                    "Rp ${formatCurrency.format(data.subtotal! + data.ongkir!)}",
                                     style: boldTextStyle(size: 12),
                                   ),
                                 ],
@@ -186,7 +257,7 @@ class _CategoryTabState extends State<CategoryTab> {
                               Divider(),
                               5.height,
                               Text(
-                                'Detail Alamat',
+                                'Detail Alamat Pengiriman',
                                 style: boldTextStyle(size: 12),
                               ),
                               5.height,
@@ -206,7 +277,7 @@ class _CategoryTabState extends State<CategoryTab> {
                                 itemCount: data.detailTransaksi!.length,
                                 itemBuilder: (c, i) {
                                   var produk = data.detailTransaksi![i];
-              
+
                                   return ListTile(
                                     leading: Container(
                                       width: 50,
@@ -218,7 +289,8 @@ class _CategoryTabState extends State<CategoryTab> {
                                                   produk.product!.image!,
                                             ),
                                             fit: BoxFit.cover),
-                                        borderRadius: BorderRadius.circular(100),
+                                        borderRadius:
+                                            BorderRadius.circular(100),
                                       ),
                                     ),
                                     title: Text(
@@ -238,6 +310,7 @@ class _CategoryTabState extends State<CategoryTab> {
                               ),
                               10.height,
                               if (data.statusOrderId != 1 &&
+                                  data.statusOrderId != 6 &&
                                   data.statusOrderId != 5)
                                 SizedBox(
                                     width: double.infinity,
@@ -247,7 +320,7 @@ class _CategoryTabState extends State<CategoryTab> {
                                         primary: AppColors.primaryColorRed,
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(40.0),
+                                              BorderRadius.circular(10.0),
                                         ),
                                       ),
                                       onPressed: () {
@@ -257,6 +330,130 @@ class _CategoryTabState extends State<CategoryTab> {
                                       },
                                       child: Text(
                                         "Konfirmasi Barang Diterima",
+                                        style: AppFont.medium.copyWith(
+                                            fontSize: 17, color: Colors.white),
+                                      ),
+                                    )),
+                              if (data.statusOrderId == 1)
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Flexible(
+                                      child: SizedBox(
+                                          width: double.infinity,
+                                          height: 30,
+                                          child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              primary: Colors.green,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              Get.to(PayScreen(
+                                                  orderId: data.id.toString(),
+                                                  url:
+                                                      'https://simulator.sandbox.midtrans.com/bca/va/index'));
+                                              // String? size = product.inventory![productViewModel.selectIndex].size;
+                                              // String? color = product.inventory![productViewModel.selectIndex].color;
+                                            },
+                                            child: Text(
+                                              "BCA VA",
+                                              style: AppFont.medium.copyWith(
+                                                  fontSize: 12,
+                                                  color: Colors.white),
+                                            ),
+                                          )),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Flexible(
+                                      child: SizedBox(
+                                          width: double.infinity,
+                                          height: 30,
+                                          child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              primary: Colors.green,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              Get.to(PayScreen(
+                                                  orderId: data.id.toString(),
+                                                  url:
+                                                      'https://simulator.sandbox.midtrans.com/bri/va/index'));
+                                              // String? size = product.inventory![productViewModel.selectIndex].size;
+                                              // String? color = product.inventory![productViewModel.selectIndex].color;
+                                            },
+                                            child: Text(
+                                              "BRI VA",
+                                              style: AppFont.medium.copyWith(
+                                                  fontSize: 12,
+                                                  color: Colors.white),
+                                            ),
+                                          )),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Flexible(
+                                      child: SizedBox(
+                                          width: double.infinity,
+                                          height: 30,
+                                          child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              primary: Colors.green,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              Get.to(PayScreen(
+                                                  orderId: data.id.toString(),
+                                                  url:
+                                                      'https://simulator.sandbox.midtrans.com/indomaret/index'));
+                                              // String? size = product.inventory![productViewModel.selectIndex].size;
+                                              // String? color = product.inventory![productViewModel.selectIndex].color;
+                                            },
+                                            child: Text(
+                                              "Indomaret",
+                                              style: AppFont.medium.copyWith(
+                                                  fontSize: 12,
+                                                  color: Colors.white),
+                                            ),
+                                          )),
+                                    ),
+                                  ],
+                                ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              if (data.statusOrderId == 1)
+                                SizedBox(
+                                    width: double.infinity,
+                                    height: 50,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        primary: AppColors.primaryColorRed,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        value.cancelOrder(data.id.toString());
+                                        // String? size = product.inventory![productViewModel.selectIndex].size;
+                                        // String? color = product.inventory![productViewModel.selectIndex].color;
+                                      },
+                                      child: Text(
+                                        "Batalkan Pesanan",
                                         style: AppFont.medium.copyWith(
                                             fontSize: 17, color: Colors.white),
                                       ),

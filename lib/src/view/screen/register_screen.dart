@@ -17,6 +17,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final emailController = TextEditingController();
 
   final nameController = TextEditingController();
+  final noHp = TextEditingController();
 
   final passController = TextEditingController();
 
@@ -62,6 +63,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 TextFieldAddress(
                     textEditingController: nameController,
                     lableText: "Nama Lengkap"),
+                SizedBox(
+                  height: 10,
+                ),
+                TextFieldAddress(
+                    textEditingController: noHp,
+                    lableText: "No Hp"),
                 SizedBox(
                   height: 10,
                 ),
@@ -144,7 +151,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       authViewModel.register(
                           nameController.text.trim(),
                           emailController.text.trim(),
-                          passController.text.trim());
+                          passController.text.trim(),
+                          noHp.text.trim());
                     },
                     child: Text(
                       "Daftar Sekarang".toUpperCase(),

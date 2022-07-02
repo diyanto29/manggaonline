@@ -8,15 +8,16 @@ import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
 import '../../../../viewmodel/cart_viewmodel.dart';
 
-class CheckoutView extends StatefulWidget {
+class PayScreen extends StatefulWidget {
   final String url;
-  const CheckoutView({Key? key, required this.url}) : super(key: key);
+  final String orderId;
+  const PayScreen({Key? key, required this.url, required this.orderId}) : super(key: key);
 
   @override
-  State<CheckoutView> createState() => _CheckoutViewState();
+  State<PayScreen> createState() => _PayScreenState();
 }
 
-class _CheckoutViewState extends State<CheckoutView> {
+class _PayScreenState extends State<PayScreen> {
   InAppWebViewController? _webViewController;
   @override
   Widget build(BuildContext context) {
@@ -27,8 +28,9 @@ class _CheckoutViewState extends State<CheckoutView> {
             ),
             onUpdateVisitedHistory:
                 (InAppWebViewController controller, Uri? uri, bool? isReload) {
-              if (uri.toString().split('&').last ==
-                  'transaction_status=pending') {
+              if (uri.toString().split('/').last == 'payment') {
+                Provider.of<CartViewModel>(context, listen: false)
+                    .callbackMidtrans(widget.orderId);
                 Provider.of<CartViewModel>(context, listen: false)
                     .getTransaksi();
                 Get.back();

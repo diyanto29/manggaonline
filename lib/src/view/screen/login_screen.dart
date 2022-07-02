@@ -31,6 +31,14 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Center(
+                  child: Image.asset(
+                    'assets/image/logo.png',
+                    width: 120,
+                    height: 120,
+                  ),
+                ),
+
                 // IconButton(
                 //     onPressed: () => Navigator.pop(context),
                 //     alignment: Alignment.topLeft,
@@ -41,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 //       size: 20,
                 //     )),
                 SizedBox(
-                  height: 40,
+                  height: 30,
                 ),
                 Text(
                   "Login",
@@ -74,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: emailController,
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      labelText: "Email",
+                      labelText: "Nomor Hp",
                       alignLabelWithHint: true, // center labastyle
                       labelStyle: AppFont.regular.copyWith(
                         fontSize: 13,
