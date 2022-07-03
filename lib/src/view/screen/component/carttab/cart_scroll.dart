@@ -135,6 +135,7 @@ class CartScroll extends StatelessWidget {
                       key: UniqueKey(),
                       onDismissed: (value) {
                         // cartViewModel.removeCart(index);
+                        data.deleteCart(listCart[index].id.toString());
                       },
                       background: Container(
                         width: 50,

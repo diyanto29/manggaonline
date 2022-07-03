@@ -257,7 +257,12 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                         ),
                       ),
                       onPressed: () {
-                        Get.to(CartTab());
+                        Provider.of<ProductViewModel>(ctx, listen: false)
+                            .addKeranjang(widget.product!.id.toString(),
+                                isCart: false)
+                            .then((value) {
+                          Get.to(CartTab());
+                        });
                       },
                       child: Text(
                         "Beli Sekarang".toUpperCase(),

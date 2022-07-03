@@ -83,7 +83,7 @@ class ProductViewModel extends ChangeNotifier with DioService {
     }
   }
 
-  Future addKeranjang(String productId) async {
+  Future addKeranjang(String productId, {bool isCart = true}) async {
     loadingBuilder();
 
     final res = await dio.post('simpankranjang', data: {
@@ -93,7 +93,8 @@ class ProductViewModel extends ChangeNotifier with DioService {
     });
     Get.back();
     if (res.statusCode == 201) {
-      toast('Produk Berhasil Masuk Keranjang', gravity: ToastGravity.CENTER);
+      if (isCart)
+        toast('Produk Berhasil Masuk Keranjang', gravity: ToastGravity.CENTER);
     } else {
       toast(res.data['message'], gravity: ToastGravity.CENTER);
     }
