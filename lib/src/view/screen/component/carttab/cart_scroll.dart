@@ -15,9 +15,12 @@ import 'package:provider/provider.dart';
 import 'cart_item.dart';
 
 class CartScroll extends StatelessWidget {
+  final bool fromBeliLangusng;
   final List<DataCart> listCart;
 
-  const CartScroll({Key? key, required this.listCart}) : super(key: key);
+  const CartScroll(
+      {Key? key, required this.listCart, required this.fromBeliLangusng})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -292,7 +295,7 @@ class CartScroll extends StatelessWidget {
                         textStyle: AppFont.medium.copyWith(
                             fontSize: 15, fontWeight: FontWeight.normal)),
                     onPressed: () {
-                      data.checkOut();
+                      data.checkOut(fromBeliLangusng);
                     },
                     child: Text('Checkout'),
                   ),

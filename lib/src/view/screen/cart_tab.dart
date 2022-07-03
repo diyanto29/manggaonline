@@ -6,6 +6,9 @@ import 'package:provider/provider.dart';
 import 'component/carttab/cart_scroll.dart';
 
 class CartTab extends StatefulWidget {
+  final bool fromBeliLangusng;
+
+  const CartTab({Key? key,  this.fromBeliLangusng=false}) : super(key: key);
   @override
   State<CartTab> createState() => _CartTabState();
 }
@@ -34,7 +37,7 @@ class _CartTabState extends State<CartTab> {
                   child: Text("Keranjang Kosong"),
                 );
               } else {
-                return CartScroll(listCart: value.cartModel!.data!);
+                return CartScroll(listCart: value.cartModel!.data!,fromBeliLangusng: widget.fromBeliLangusng,);
               }
             }
 

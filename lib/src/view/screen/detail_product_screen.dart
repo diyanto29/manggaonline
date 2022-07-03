@@ -261,7 +261,9 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                             .addKeranjang(widget.product!.id.toString(),
                                 isCart: false)
                             .then((value) {
-                          Get.to(CartTab());
+                          Get.to(CartTab(
+                            fromBeliLangusng: true,
+                          ));
                         });
                       },
                       child: Text(

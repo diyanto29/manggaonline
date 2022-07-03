@@ -293,7 +293,7 @@ class CartViewModel extends ChangeNotifier with DioService {
     }
   }
 
-  Future checkOut() async {
+  Future checkOut(bool formBeliLangusng) async {
     if (citySelected == null) {
       toast('Alamat Wajib Disi', gravity: ToastGravity.TOP);
       return;
@@ -319,6 +319,7 @@ class CartViewModel extends ChangeNotifier with DioService {
     Get.back();
     if (res.statusCode == 201) {
       getCartProduk();
+      if (formBeliLangusng) Get.back();
       toast('Berhasil CheckOut', gravity: ToastGravity.CENTER);
 
       Get.to(CheckoutView(url: res.data['data']['url_midtrans']));
