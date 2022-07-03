@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 class HeaderPage extends StatelessWidget {
   List<String> listImage = [
-    'https://cdn3.vectorstock.com/i/1000x1000/81/02/fresh-mango-juice-splash-banner-with-apteitic-vector-24518102.jpg',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0Yaa91-8Brc9J-shEYZrfo7cGYLg9ehoqeCBteN5MoRzlrD-J-he7Imedlwqvk-8VxEY&usqp=CAU',
-    'https://png.pngtree.com/background/20210710/original/pngtree-mango-fruit-background-picture-picture-image_1035517.jpg',
+    'assets/image/banner1.jpg',
+    'assets/image/banner2.jpg',
+    'assets/image/banner3.jpg'
   ];
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class HeaderPage extends StatelessWidget {
           // autoPlay: false,
         ),
         items: listImage
-            .map((e) => Image.network(
+            .map((e) => Image.asset(
                   e,
                   fit: BoxFit.cover,
                 ))
