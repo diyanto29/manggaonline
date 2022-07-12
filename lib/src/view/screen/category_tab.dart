@@ -108,7 +108,7 @@ class _CategoryTabState extends State<CategoryTab> {
                                         borderRadius: BorderRadius.circular(5),
                                         color: Colors.green),
                                     child: Text(
-                                      DateFormat('dd-MMMM-yyyy', 'id')
+                                      DateFormat('dd-MMMM-yyyy HH:mm:ss', 'id')
                                           .format(data.createdAt!),
                                       style: primaryTextStyle(
                                         size: 12,
