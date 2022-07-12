@@ -193,7 +193,7 @@ class _CategoryTabState extends State<CategoryTab> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Total',
+                                    'Total Barang',
                                     style: secondaryTextStyle(size: 12),
                                   ),
                                   5.height,
@@ -255,6 +255,16 @@ class _CategoryTabState extends State<CategoryTab> {
                               ),
                               10.height,
                               Divider(),
+                              5.height,
+                              Text(
+                                'Catatan Pembeli',
+                                style: boldTextStyle(size: 12),
+                              ),
+                              5.height,
+                              Text('${data.pesan ?? '-'}'),
+                              10.height,
+                              Divider(),
+
                               5.height,
                               Text(
                                 'Detail Alamat Pengiriman',
@@ -418,12 +428,12 @@ class _CategoryTabState extends State<CategoryTab> {
                                               Get.to(PayScreen(
                                                   orderId: data.id.toString(),
                                                   url:
-                                                      'https://simulator.sandbox.midtrans.com/indomaret/index'));
+                                                      'https://simulator.sandbox.midtrans.com/bni/va/index'));
                                               // String? size = product.inventory![productViewModel.selectIndex].size;
                                               // String? color = product.inventory![productViewModel.selectIndex].color;
                                             },
                                             child: Text(
-                                              "Indomaret",
+                                              "BNI VA",
                                               style: AppFont.medium.copyWith(
                                                   fontSize: 12,
                                                   color: Colors.white),

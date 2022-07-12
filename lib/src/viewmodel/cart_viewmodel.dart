@@ -51,6 +51,7 @@ class CartViewModel extends ChangeNotifier with DioService {
   int totalCart = 0;
   TextEditingController controllerAddress = TextEditingController();
   TransaksiModel? transaksiModel;
+  TextEditingController controllerCatatan = TextEditingController();
 
   addToCart(Product product, Inventory inventoryy) {
     productCount = 0;
@@ -308,13 +309,14 @@ class CartViewModel extends ChangeNotifier with DioService {
       "ongkir": ongkir,
       "biaya_cod": 0,
       "no_hp": session.read('no_hp'),
-      "pesan": "sesuai aplikasi",
+      "pesan": controllerCatatan.text.trim(),
       "city_name": citySelected!.cityName!,
       "city_id": citySelected!.cityId!,
       "province_name": citySelected!.province!,
       "province_id": citySelected!.provinceId,
       "detail_alamat": controllerAddress.text.trim(),
       "type": citySelected!.type!,
+      "catatan": controllerCatatan.text.trim()
     });
     Get.back();
     if (res.statusCode == 201) {

@@ -160,6 +160,16 @@ class CartScroll extends StatelessWidget {
                 SizedBox(
                   height: 50,
                 ),
+                TextField(
+                  controller: data.controllerCatatan,
+                  decoration: InputDecoration(
+                    
+                    labelText: 'Catatan Pembeli',
+                  ),
+                ),
+                SizedBox(
+                  height: 50,
+                ),
                 Row(
                   children: [
                     buildTextHeader(title: "Rincian"),
