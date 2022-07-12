@@ -119,6 +119,36 @@ class _CategoryTabState extends State<CategoryTab> {
                                 ],
                               ),
                               10.height,
+                              if (data.statusOrderId == 5)
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Tanggal Diterima',
+                                      style: boldTextStyle(size: 12),
+                                    ),
+                                    5.height,
+                                    Container(
+                                      padding: const EdgeInsets.all(4),
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: Colors.green),
+                                      child: Text(
+                                        DateFormat(
+                                                'dd-MMMM-yyyy HH:mm:ss', 'id')
+                                            .format(data.updatedAt!),
+                                        style: primaryTextStyle(
+                                          size: 12,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              10.height,
                               // Row(
                               //   mainAxisAlignment:
                               //       MainAxisAlignment.spaceBetween,
