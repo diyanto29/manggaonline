@@ -1,6 +1,7 @@
 import 'package:fashion_app/network/dio_service.dart';
 import 'package:fashion_app/src/view/screen/component/dialog_loading.dart';
 import 'package:fashion_app/src/view/screen/dash_board_screen.dart';
+import 'package:fashion_app/src/view/screen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -64,13 +65,14 @@ class AuthViewModel extends ChangeNotifier with DioService {
     Get.back();
     if (res.statusCode == 201) {
       if (res.data['status']) {
-        var data = res.data['data'];
-        session.write('userID', data['id']);
-        session.write('username', data['name']);
-        session.write('email', data['email']);
-        session.write('role', data['role']);
-        session.write('no_hp', data['no_hp']);
-        Get.offAll(DashBoardScreen());
+        // var data = res.data['data'];
+        // session.write('userID', data['id']);
+        // session.write('username', data['name']);
+        // session.write('email', data['email']);
+        // session.write('role', data['role']);
+        // session.write('no_hp', data['no_hp']);
+        
+        Get.offAll(LoginScreen());
         toast('Register Berhasil', gravity: ToastGravity.TOP);
       } else {
         toast('Register Gagal', gravity: ToastGravity.TOP);
