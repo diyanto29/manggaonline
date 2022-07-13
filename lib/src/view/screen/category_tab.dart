@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:fashion_app/main.dart';
+import 'package:fashion_app/src/data/service/timezone.dart';
 import 'package:fashion_app/src/view/screen/component/carttab/pay_screen.dart';
 import 'package:fashion_app/src/viewmodel/cart_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -109,7 +110,9 @@ class _CategoryTabState extends State<CategoryTab> {
                                         color: Colors.green),
                                     child: Text(
                                       DateFormat('dd-MMMM-yyyy HH:mm:ss', 'id')
-                                          .format(data.createdAt!),
+                                          .format(TimeZone.convertToLocal2(
+                                                  data.createdAt.toString())
+                                              .toLocal()),
                                       style: primaryTextStyle(
                                         size: 12,
                                         color: Colors.white,
@@ -137,9 +140,10 @@ class _CategoryTabState extends State<CategoryTab> {
                                               BorderRadius.circular(5),
                                           color: Colors.green),
                                       child: Text(
-                                        DateFormat(
-                                                'dd-MMMM-yyyy HH:mm:ss', 'id')
-                                            .format(data.updatedAt!),
+                                       DateFormat('dd-MMMM-yyyy HH:mm:ss', 'id')
+                                          .format(TimeZone.convertToLocal2(
+                                                  data.updatedAt.toString())
+                                              .toLocal()),
                                         style: primaryTextStyle(
                                           size: 12,
                                           color: Colors.white,
