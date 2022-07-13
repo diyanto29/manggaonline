@@ -323,7 +323,8 @@ class CartViewModel extends ChangeNotifier with DioService {
       "ongkir": ongkir,
       "biaya_cod": 0,
       "no_hp": session.read('no_hp'),
-      "pesan": controllerCatatan.text.trim(),
+      "pesan":
+          controllerCatatan.text.isEmpty ? '-' : controllerCatatan.text.trim(),
       "city_name": citySelected!.cityName!,
       "city_id": citySelected!.cityId!,
       "province_name": citySelected!.province!,
