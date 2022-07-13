@@ -157,7 +157,7 @@ class _CartProductState extends State<CartProduct> {
           //   style: AppFont.regular.copyWith(
           //     fontSize: 13,
           //     color: Colors.grey,
-          //     fontWeight: FontWeight.normal,
+          //     fontWeight: FonptWeight.normal,
           //   ),
           // ),
           // SizedBox(

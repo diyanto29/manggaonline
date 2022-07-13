@@ -237,6 +237,9 @@ class _PersonalTabState extends State<PersonalTab> {
                     sesion.remove('email');
                     sesion.remove('username');
                     sesion.remove('role');
+                    sesion.remove('alamat_detail');
+                    sesion.remove('provinsi');
+                    sesion.remove('alamat');
                     Get.offAll(LoginScreen());
                   },
                   title: Text(
