@@ -133,6 +133,7 @@ class AuthViewModel extends ChangeNotifier with DioService {
     if (session.hasData('alamat')) {
       cityData = CityData.fromJson(jsonDecode(session.read('alamat')));
       detailAlamat = session.read('alamat_detail');
+      
       notifyListeners();
     }
   }

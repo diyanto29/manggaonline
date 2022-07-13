@@ -8,6 +8,7 @@ import 'package:fashion_app/src/view/screen/component/addaddress/address.dart';
 import 'package:fashion_app/src/view/screen/edit_user.dart';
 import 'package:fashion_app/src/view/screen/login_screen.dart';
 import 'package:fashion_app/src/viewmodel/auth_viemodel.dart';
+import 'package:fashion_app/src/viewmodel/cart_viewmodel.dart';
 import 'package:fashion_app/src/viewmodel/product_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,6 +32,8 @@ class _PersonalTabState extends State<PersonalTab> {
   @override
   void initState() {
     Provider.of<AuthViewModel>(context, listen: false).getSession();
+    Provider.of<AuthViewModel>(context, listen: false).getAddress();
+    Provider.of<CartViewModel>(context, listen: false).initial();
     super.initState();
   }
 

@@ -183,12 +183,13 @@ class CartViewModel extends ChangeNotifier with DioService {
     }
   }
 
-  Future<void> initial() async {
+  Future<void> initial({bool profile = false}) async {
     if (session.hasData('alamat')) {
       provinceSelect = Result.fromJson(jsonDecode(session.read('provinsi')));
       citySelected = CityData.fromJson(jsonDecode(session.read('alamat')));
+      controllerAddress.text = session.read('alamat_detail');
       notifyListeners();
-      await getCostData('jne');
+      if (!profile) await getCostData('jne');
     }
   }
 
