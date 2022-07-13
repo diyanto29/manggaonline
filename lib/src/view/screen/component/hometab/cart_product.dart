@@ -152,24 +152,24 @@ class _CartProductState extends State<CartProduct> {
           SizedBox(
             height: 2,
           ),
-          Text(
-            "Stok ${widget.product!.stok.toString()}",
-            style: AppFont.regular.copyWith(
-              fontSize: 13,
-              color: Colors.grey,
-              fontWeight: FontWeight.normal,
-            ),
-          ),
-          SizedBox(
-            height: 2,
-          ),
-          Text(
-            "Satuan : ${widget.product!.unit.toString()}",
-            style: AppFont.regular.copyWith(
-              fontSize: 13,
-              color: Colors.grey,
-              fontWeight: FontWeight.normal,
-            ),
+          // Text(
+          //   "Stok ${widget.product!.stok.toString()}",
+          //   style: AppFont.regular.copyWith(
+          //     fontSize: 13,
+          //     color: Colors.grey,
+          //     fontWeight: FontWeight.normal,
+          //   ),
+          // ),
+          // SizedBox(
+          //   height: 2,
+          // ),
+          // Text(
+          //   "Satuan : ${widget.product!.unit.toString()}",
+          //   style: AppFont.regular.copyWith(
+          //     fontSize: 13,
+          //     color: Colors.grey,
+          //     fontWeight: FontWeight.normal,
+          //   ),
           ),
           SizedBox(
             height: 2,

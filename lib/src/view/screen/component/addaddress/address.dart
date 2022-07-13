@@ -81,7 +81,7 @@ class _AddressViewAddState extends State<AddressViewAdd> {
                           items: data.provinceModel?.rajaongkir?.results ?? [],
                           onChanged: (value) {
                             data.setProviceSleect(value!);
-                            session.write('provinsi', jsonEncode(value));
+
                             Provider.of<AuthViewModel>(context, listen: false)
                                 .getAddress();
                           },
@@ -98,7 +98,7 @@ class _AddressViewAddState extends State<AddressViewAdd> {
                           items: data.cityModel?.rajaongkir?.results ?? [],
                           onChanged: (value) {
                             data.setCitySelected(value!);
-                            session.write('alamat', jsonEncode(value));
+
                             Provider.of<AuthViewModel>(context, listen: false)
                                 .getAddress();
                           },
@@ -113,11 +113,6 @@ class _AddressViewAddState extends State<AddressViewAdd> {
                       10.height,
                       TextField(
                         controller: data.controllerAddress,
-                        onChanged: (v) {
-                          session.write('alamat_detail', v);
-                          Provider.of<AuthViewModel>(context, listen: false)
-                              .getAddress();
-                        },
                         decoration: InputDecoration(
                             hintText: 'Detail Alamat',
                             border: OutlineInputBorder()),
@@ -126,25 +121,33 @@ class _AddressViewAddState extends State<AddressViewAdd> {
                     ],
                   ),
                   20.height,
-                  // SizedBox(
-                  //     width: double.infinity,
-                  //     height: 50,
-                  //     child: ElevatedButton(
-                  //       style: ElevatedButton.styleFrom(
-                  //         primary: AppColors.primaryColorRed,
-                  //         shape: RoundedRectangleBorder(
-                  //           borderRadius: BorderRadius.circular(40.0),
-                  //         ),
-                  //       ),
-                  //       onPressed: () {
-                  //         Get.back();
-                  //       },
-                  //       child: Text(
-                  //         "Simpan",
-                  //         style: AppFont.medium
-                  //             .copyWith(fontSize: 17, color: Colors.white),
-                  //       ),
-                  //     )),
+                  SizedBox(
+                      width: double.infinity,
+                      height: 50,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: AppColors.primaryColorRed,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(40.0),
+                          ),
+                        ),
+                        onPressed: () {
+                          session.write(
+                              'provinsi', jsonEncode(data.provinceSelect));
+                          session.write(
+                              'alamat', jsonEncode(data.citySelected));
+                          session.write(
+                              'alamat_detail', data.controllerAddress.text);
+                          Provider.of<AuthViewModel>(context, listen: false)
+                              .getAddress();
+                          Get.back();
+                        },
+                        child: Text(
+                          "Simpan",
+                          style: AppFont.medium
+                              .copyWith(fontSize: 17, color: Colors.white),
+                        ),
+                      )),
                 ],
               );
             }),
