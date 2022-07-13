@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:fashion_app/network/dio_service.dart';
@@ -158,8 +159,10 @@ class CartViewModel extends ChangeNotifier with DioService {
       cartModel = CartModel.fromJson(res.data);
       cartModel!.data!.forEach((element) {
         total += (element.qty! * element.price!);
-        totalWeight += (element.weigth!*element.qty!);
+        totalWeight += (element.weigth! * element.qty!);
       });
+
+      await initial();
 
       totalCart = total.toInt() + adminConst + ongkir;
       notifyListeners();
@@ -177,6 +180,15 @@ class CartViewModel extends ChangeNotifier with DioService {
       getCartProduk();
     } else {
       toast(res.data['message'], gravity: ToastGravity.CENTER);
+    }
+  }
+
+  Future<void> initial() async {
+    if (session.hasData('alamat')) {
+      provinceSelect = Result.fromJson(jsonDecode(session.read('provinsi')));
+      citySelected = CityData.fromJson(jsonDecode(session.read('alamat')));
+      notifyListeners();
+      await getCostData('jne');
     }
   }
 
@@ -219,7 +231,7 @@ class CartViewModel extends ChangeNotifier with DioService {
     notifyListeners();
   }
 
-  void getCostData(String? v) async {
+  Future getCostData(String? v) async {
     costModel = null;
     notifyListeners();
     final res =
@@ -231,6 +243,7 @@ class CartViewModel extends ChangeNotifier with DioService {
     });
 
     costModel = CostModel.fromJson(res.data);
+    tapOngkir(costModel!.rajaongkir!.results![0]);
     notifyListeners();
   }
 
@@ -316,7 +329,8 @@ class CartViewModel extends ChangeNotifier with DioService {
       "province_id": citySelected!.provinceId,
       "detail_alamat": controllerAddress.text.trim(),
       "type": citySelected!.type!,
-      "catatan": controllerCatatan.text.trim()
+      "catatan":
+          controllerCatatan.text.isEmpty ? '-' : controllerCatatan.text.trim()
     });
     Get.back();
     if (res.statusCode == 201) {

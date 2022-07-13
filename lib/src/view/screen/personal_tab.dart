@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:fashion_app/src/const/app_font.dart';
+import 'package:fashion_app/src/data/model/city_model/result.dart';
 import 'package:fashion_app/src/router/router_path.dart';
 import 'package:fashion_app/src/view/screen/choice_address_screen.dart';
+import 'package:fashion_app/src/view/screen/component/addaddress/address.dart';
 import 'package:fashion_app/src/view/screen/edit_user.dart';
 import 'package:fashion_app/src/view/screen/login_screen.dart';
 import 'package:fashion_app/src/viewmodel/auth_viemodel.dart';
@@ -34,6 +38,7 @@ class _PersonalTabState extends State<PersonalTab> {
   Widget build(BuildContext context) {
     var productVM = Provider.of<ProductViewModel>(context, listen: false);
     GetStorage sesion = GetStorage();
+    // sesion.remove('alamat');
 
     return Consumer<AuthViewModel>(builder: (context, data, _) {
       return Container(
@@ -197,6 +202,32 @@ class _PersonalTabState extends State<PersonalTab> {
                   // ),
                 ),
                 ListTile(
+                  onTap: () => showBottomSheeet(context),
+                  title: Text(
+                    'Alamat Saya',
+                    style: AppFont.semiBold
+                        .copyWith(fontWeight: FontWeight.bold, fontSize: 17),
+                  ),
+                  subtitle: Text(
+                    data.cityData != null
+                        ? data.detailAlamat.toString() +
+                            " ${data.cityData!.type} ${data.cityData!.cityName} ${data.cityData!.province}"
+                        : '-',
+                    style: AppFont.regular.copyWith(
+                        fontWeight: FontWeight.w100,
+                        fontSize: 13,
+                        color: Colors.grey),
+                  ),
+                  // trailing: IconButton(
+                  //   onPressed: () {},
+                  //   icon: Icon(
+                  //     Icons.arrow_forward_ios,
+                  //     size: 18,
+                  //     color: Colors.grey,
+                  //   ),
+                  // ),
+                ),
+                ListTile(
                   //           contentPadding: EdgeInsets.all(0.0),
                   onTap: () {
                     sesion.remove('userID');
@@ -283,4 +314,9 @@ class _PersonalTabState extends State<PersonalTab> {
       );
     });
   }
+}
+
+Future showBottomSheeet(BuildContext context) {
+  return Get.bottomSheet(const AddressViewAdd(),
+      isScrollControlled: true, elevation: 3);
 }

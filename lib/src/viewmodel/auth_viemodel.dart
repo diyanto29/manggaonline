@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:fashion_app/network/dio_service.dart';
 import 'package:fashion_app/src/view/screen/component/dialog_loading.dart';
 import 'package:fashion_app/src/view/screen/dash_board_screen.dart';
@@ -8,11 +10,15 @@ import 'package:get_storage/get_storage.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
+import '../data/model/city_model/result.dart';
+
 class AuthViewModel extends ChangeNotifier with DioService {
   bool isLoggedIn = false;
   bool isLoading = false;
   GetStorage session = GetStorage();
   String? username, noHp, email;
+  CityData? cityData;
+  String? detailAlamat;
 
   Future login() async {
     isLoggedIn = true;
@@ -71,7 +77,7 @@ class AuthViewModel extends ChangeNotifier with DioService {
         // session.write('email', data['email']);
         // session.write('role', data['role']);
         // session.write('no_hp', data['no_hp']);
-        
+
         Get.offAll(LoginScreen());
         toast('Register Berhasil', gravity: ToastGravity.TOP);
       } else {
@@ -121,5 +127,13 @@ class AuthViewModel extends ChangeNotifier with DioService {
     noHp = session.read('no_hp');
     email = session.read('email');
     notifyListeners();
+  }
+
+  void getAddress() {
+    if (session.hasData('alamat')) {
+      cityData = CityData.fromJson(jsonDecode(session.read('alamat')));
+      detailAlamat = session.read('alamat_detail');
+      notifyListeners();
+    }
   }
 }
