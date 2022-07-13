@@ -240,6 +240,16 @@ class _PersonalTabState extends State<PersonalTab> {
                     sesion.remove('alamat_detail');
                     sesion.remove('provinsi');
                     sesion.remove('alamat');
+                    Provider.of<CartViewModel>(context, listen: false)
+                        .citySelected = null;
+                    Provider.of<CartViewModel>(context, listen: false)
+                        .provinceSelect = null;
+                    Provider.of<CartViewModel>(context, listen: false)
+                        .controllerCatatan
+                        .clear();
+                    data.cityData = null;
+                    data.detailAlamat = null;
+                    
                     Get.offAll(LoginScreen());
                   },
                   title: Text(
