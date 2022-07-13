@@ -170,7 +170,7 @@ class _CartProductState extends State<CartProduct> {
           //     color: Colors.grey,
           //     fontWeight: FontWeight.normal,
           //   ),
-          ),
+          // ),
           SizedBox(
             height: 2,
           ),
