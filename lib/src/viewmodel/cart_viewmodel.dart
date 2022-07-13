@@ -158,7 +158,7 @@ class CartViewModel extends ChangeNotifier with DioService {
       cartModel = CartModel.fromJson(res.data);
       cartModel!.data!.forEach((element) {
         total += (element.qty! * element.price!);
-        totalWeight += element.weigth!;
+        totalWeight += (element.weigth!*element.qty!);
       });
 
       totalCart = total.toInt() + adminConst + ongkir;
