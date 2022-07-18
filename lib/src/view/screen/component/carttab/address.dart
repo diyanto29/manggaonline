@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:fashion_app/main.dart';
 import 'package:fashion_app/src/data/model/city_model/result.dart';
@@ -6,12 +8,14 @@ import 'package:fashion_app/src/data/model/province_model/result.dart';
 import 'package:fashion_app/src/viewmodel/cart_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../const/app_colors.dart';
 import '../../../../const/app_font.dart';
+import '../../../../viewmodel/auth_viemodel.dart';
 
 class AddressView extends StatefulWidget {
   const AddressView({Key? key}) : super(key: key);
@@ -21,6 +25,8 @@ class AddressView extends StatefulWidget {
 }
 
 class _AddressViewState extends State<AddressView> {
+
+    GetStorage session = GetStorage();
   @override
   void initState() {
     Provider.of<CartViewModel>(context, listen: false).getProvince();
@@ -153,6 +159,14 @@ class _AddressViewState extends State<AddressView> {
                           ),
                         ),
                         onPressed: () {
+                           session.write(
+                              'provinsi', jsonEncode(data.provinceSelect));
+                          session.write(
+                              'alamat', jsonEncode(data.citySelected));
+                          session.write(
+                              'alamat_detail', data.controllerAddress.text);
+                          Provider.of<AuthViewModel>(context, listen: false)
+                              .getAddress();
                           Get.back();
                           // String? size = product.inventory![productViewModel.selectIndex].size;
                           // String? color = product.inventory![productViewModel.selectIndex].color;
