@@ -25,8 +25,7 @@ class AddressView extends StatefulWidget {
 }
 
 class _AddressViewState extends State<AddressView> {
-
-    GetStorage session = GetStorage();
+  GetStorage session = GetStorage();
   @override
   void initState() {
     Provider.of<CartViewModel>(context, listen: false).getProvince();
@@ -159,15 +158,16 @@ class _AddressViewState extends State<AddressView> {
                           ),
                         ),
                         onPressed: () {
-                           session.write(
+                          session.write(
                               'provinsi', jsonEncode(data.provinceSelect));
                           session.write(
                               'alamat', jsonEncode(data.citySelected));
                           session.write(
                               'alamat_detail', data.controllerAddress.text);
                           Provider.of<AuthViewModel>(context, listen: false)
-                              .getAddress();
-                          Get.back();
+                              .getAddress()
+                              .then((value) => Get.back());
+                          // Get.back();
                           // String? size = product.inventory![productViewModel.selectIndex].size;
                           // String? color = product.inventory![productViewModel.selectIndex].color;
                         },

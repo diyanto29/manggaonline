@@ -229,6 +229,7 @@ class CartViewModel extends ChangeNotifier with DioService {
     });
 
     costModel = CostModel.fromJson(res.data);
+    tapOngkir(costModel!.rajaongkir!.results![0]);
     notifyListeners();
   }
 

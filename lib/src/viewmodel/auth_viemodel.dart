@@ -129,11 +129,11 @@ class AuthViewModel extends ChangeNotifier with DioService {
     notifyListeners();
   }
 
-  void getAddress() {
+  Future<void> getAddress() async{
     if (session.hasData('alamat')) {
       cityData = CityData.fromJson(jsonDecode(session.read('alamat')));
       detailAlamat = session.read('alamat_detail');
-      
+
       notifyListeners();
     }
   }
