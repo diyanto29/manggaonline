@@ -10,9 +10,10 @@ import '../../../../const/endpoint.dart';
 
 class CartItem extends StatelessWidget {
   final DataCart dataCart;
+  final bool fromBeli;
   const CartItem({
     Key? key,
-    required this.dataCart,
+    required this.dataCart, required this.fromBeli,
   }) : super(key: key);
 
   @override
@@ -61,7 +62,7 @@ class CartItem extends StatelessWidget {
                       Flexible(
                         child: IconButton(
                             onPressed: () {
-                              cartViewModel.deleteCart(dataCart.id.toString());
+                              cartViewModel.deleteCart(dataCart.id.toString(),fromBeli);
                             },
                             icon: Icon(Icons.delete)),
                       )

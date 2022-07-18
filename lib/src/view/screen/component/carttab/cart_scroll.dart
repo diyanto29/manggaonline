@@ -153,6 +153,7 @@ class CartScroll extends StatelessWidget {
                       ),
                       child: CartItem(
                         dataCart: listCart[index],
+                        fromBeli: fromBeliLangusng,
                       ),
                     );
                   },

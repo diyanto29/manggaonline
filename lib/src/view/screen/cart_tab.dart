@@ -34,12 +34,17 @@ class _CartTabState extends State<CartTab> {
               );
             } else {
               if (value.cartModel!.data!.isEmpty) {
-                if (widget.fromBeliLangusng)
-                  Get.back();
-                else
+                if (widget.fromBeliLangusng) {
+                  return Scaffold(
+                    body: Center(
+                      child: Text("Produk Kosong"),
+                    ),
+                  );
+                } else {
                   return Center(
                     child: Text("Keranjang Kosong"),
                   );
+                }
               } else {
                 return CartScroll(
                   listCart: value.cartModel!.data!,
@@ -53,5 +58,16 @@ class _CartTabState extends State<CartTab> {
         ),
       ),
     );
+  }
+}
+
+class Kosoong extends StatelessWidget {
+  const Kosoong({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Get.back();
+    Get.back();
+    return Container();
   }
 }
