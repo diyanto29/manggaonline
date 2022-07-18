@@ -256,14 +256,19 @@ class CartViewModel extends ChangeNotifier with DioService {
     notifyListeners();
   }
 
-  Future deleteCart(String cartID) async {
+  Future deleteCart(String cartID, bool fromBeli) async {
     loadingBuilder();
 
     final res = await dio.post('deletekranjang', data: {"id": cartID});
     Get.back();
     if (res.statusCode == 201) {
-      toast('Keranjang Berhasil Hapus', gravity: ToastGravity.CENTER);
-      getCartProduk();
+      if (fromBeli) {
+        toast('Produk Berhasil dihapus', gravity: ToastGravity.CENTER);
+        getCartProduk();
+      } else {
+        toast('Keranjang Berhasil Hapus', gravity: ToastGravity.CENTER);
+        getCartProduk();
+      }
     } else {
       toast(res.data['message'], gravity: ToastGravity.CENTER);
     }

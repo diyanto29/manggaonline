@@ -138,14 +138,14 @@ class CartScroll extends StatelessWidget {
                       key: UniqueKey(),
                       onDismissed: (value) {
                         // cartViewModel.removeCart(index);
-                        data.deleteCart(listCart[index].id.toString());
+                        data.deleteCart(listCart[index].id.toString(),fromBeliLangusng);
                       },
                       background: Container(
                         width: 50,
                         decoration: BoxDecoration(
                             color: Colors.red,
                             borderRadius: BorderRadius.circular(10)),
-                        child: Icon(
+                        child:  Icon(
                           Icons.delete_outline,
                           color: Colors.white,
                           size: 25,

@@ -162,6 +162,8 @@ class _AddressViewState extends State<AddressView> {
                               'provinsi', jsonEncode(data.provinceSelect));
                           session.write(
                               'alamat', jsonEncode(data.citySelected));
+                        
+                                Provider.of<AuthViewModel>(context, listen: false).
                           session.write(
                               'alamat_detail', data.controllerAddress.text);
                           Provider.of<AuthViewModel>(context, listen: false)

@@ -134,6 +134,8 @@ class _AddressViewAddState extends State<AddressViewAdd> {
                         onPressed: () {
                           session.write(
                               'provinsi', jsonEncode(data.provinceSelect));
+                          data.controllerAddress.clear();
+                          data.controllerCatatan.clear();
                           session.write(
                               'alamat', jsonEncode(data.citySelected));
                           session.write(
