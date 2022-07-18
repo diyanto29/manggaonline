@@ -44,6 +44,7 @@ class _AddressViewState extends State<AddressView> {
                 color: Colors.white),
             child: Consumer<CartViewModel>(builder: (context, data, child) {
               return ListView(
+                // shrinkWrap: true,
                 controller: scrollController,
                 physics: const ClampingScrollPhysics(),
                 children: [
@@ -121,20 +122,18 @@ class _AddressViewState extends State<AddressView> {
                           itemBuilder: (context, index) {
                             var costDara =
                                 data.costModel!.rajaongkir!.results![index];
-                            return RadioListTile<CostData>(
-                              value: costDara,
-                              groupValue: data.costData,
-                              // selected: true,
-                              onChanged: (ind) {
-                                data.tapOngkir(ind!);
-                              },
-                              title: Text(
-                                  costDara.costs![0].description.toString() +
-                                      "( " +
-                                      costDara.costs![0].cost![0]['etd'] +
-                                      ")"),
-                              subtitle: Text(
-                                  "Rp ${formatCurrency.format(costDara.costs![0].cost![0]['value'])}"),
+                            return SizedBox(
+                              height: 60,
+                              width: 100,
+                              child: ListTile(
+                                title: Text(
+                                    costDara.costs![0].description.toString() +
+                                        "( " +
+                                        costDara.costs![0].cost![0]['etd'] +
+                                        ")"),
+                                subtitle: Text(
+                                    "Rp ${formatCurrency.format(costDara.costs![0].cost![0]['value'])}"),
+                              ),
                             );
                           },
                           itemCount:
