@@ -242,6 +242,12 @@ class _PersonalTabState extends State<PersonalTab> {
                     sesion.remove('alamat');
                     Provider.of<CartViewModel>(context, listen: false)
                         .citySelected = null;
+                    Provider.of<CartViewModel>(context, listen: false).ongkir =
+                        0;
+                    Provider.of<CartViewModel>(context, listen: false)
+                        .totalWeight = 0;
+                    Provider.of<CartViewModel>(context, listen: false).total =
+                        0;
                     Provider.of<CartViewModel>(context, listen: false)
                         .provinceSelect = null;
                     Provider.of<CartViewModel>(context, listen: false)
@@ -249,7 +255,7 @@ class _PersonalTabState extends State<PersonalTab> {
                         .clear();
                     data.cityData = null;
                     data.detailAlamat = null;
-                    
+
                     Get.offAll(LoginScreen());
                   },
                   title: Text(
