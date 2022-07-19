@@ -28,7 +28,7 @@ class AuthViewModel extends ChangeNotifier with DioService {
 
   Future loginAPi(String email, String password) async {
     if (email.isEmpty || password.isEmpty) {
-      toast('Email atau password tidak boleh kosong',
+      toast('Nomor Hp atau password tidak boleh kosong',
           gravity: ToastGravity.TOP);
       return;
     }
@@ -48,10 +48,10 @@ class AuthViewModel extends ChangeNotifier with DioService {
         session.write('no_hp', data['no_hp']);
         Get.offAll(DashBoardScreen());
       } else {
-        toast('Email atau password Salah', gravity: ToastGravity.TOP);
+        toast('Nomor Hp atau password Salah', gravity: ToastGravity.TOP);
       }
     } else {
-      toast('Email atau password Salah', gravity: ToastGravity.TOP);
+      toast('Nomor Hp atau password Salah', gravity: ToastGravity.TOP);
     }
   }
 
