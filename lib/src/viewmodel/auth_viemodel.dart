@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:fashion_app/network/dio_service.dart';
 import 'package:fashion_app/src/view/screen/component/dialog_loading.dart';
@@ -129,11 +130,11 @@ class AuthViewModel extends ChangeNotifier with DioService {
     notifyListeners();
   }
 
-  Future<void> getAddress() async{
+  Future<void> getAddress() async {
     if (session.hasData('alamat')) {
       cityData = CityData.fromJson(jsonDecode(session.read('alamat')));
       detailAlamat = session.read('alamat_detail');
-
+      log(detailAlamat);
       notifyListeners();
     }
   }

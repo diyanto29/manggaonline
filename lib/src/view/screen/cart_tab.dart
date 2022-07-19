@@ -18,6 +18,7 @@ class _CartTabState extends State<CartTab> {
   @override
   void initState() {
     Provider.of<CartViewModel>(context, listen: false).getCartProduk();
+    Provider.of<CartViewModel>(context, listen: false).getAddress();
     super.initState();
   }
 

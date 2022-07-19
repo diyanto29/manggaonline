@@ -145,6 +145,15 @@ class CartViewModel extends ChangeNotifier with DioService {
         orderNumber: "098765456789"));
   }
 
+  Future<void> getAddress() async {
+    if (session.hasData('alamat')) {
+      citySelected = CityData.fromJson(jsonDecode(session.read('alamat')));
+      provinceSelect = Result.fromJson(jsonDecode(session.read('provinsi')));
+      controllerAddress.text = session.read('alamat_detail');
+      notifyListeners();
+    }
+  }
+
   Future getCartProduk() async {
     cartModel = null;
     isLoadingCart = true;
@@ -195,6 +204,11 @@ class CartViewModel extends ChangeNotifier with DioService {
 
   Future getProvince() async {
     provinceModel = null;
+
+    if (session.hasData('detail_alamat')) {
+      controllerAddress.text = session.read('detail_alamat');
+      notifyListeners();
+    }
 
     final res = await dio.get(
       'https://api.rajaongkir.com/starter/province',

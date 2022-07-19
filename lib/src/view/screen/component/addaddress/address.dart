@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:fashion_app/main.dart';
@@ -134,12 +135,14 @@ class _AddressViewAddState extends State<AddressViewAdd> {
                         onPressed: () {
                           session.write(
                               'provinsi', jsonEncode(data.provinceSelect));
-                          data.controllerAddress.clear();
-                          data.controllerCatatan.clear();
+
                           session.write(
                               'alamat', jsonEncode(data.citySelected));
-                          session.write(
-                              'alamat_detail', data.controllerAddress.text);
+                          log(data.controllerAddress.text.trim());
+                          session.write('alamat_detail',
+                              data.controllerAddress.text.trim());
+                          data.controllerAddress.clear();
+                          data.controllerCatatan.clear();
                           Provider.of<AuthViewModel>(context, listen: false)
                               .getAddress();
                           Get.back();
